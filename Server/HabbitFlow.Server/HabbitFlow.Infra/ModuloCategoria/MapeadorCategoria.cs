@@ -22,13 +22,13 @@ public class MapeadorCategoria : IEntityTypeConfiguration<Categoria>
             .HasMany(x=>x.Compromissos)
             .WithOne()
             .IsRequired()
-            .HasForeignKey(x=>x.categoriaId)
+            .HasForeignKey(x=>x.CategoriaId)
             .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasOne(x => x.Usuario)
            .WithMany()
            .IsRequired()
-           .HasForeignKey(x => x.usuarioId)
+           .HasForeignKey(x => x.UsuarioId)
            .OnDelete(DeleteBehavior.NoAction);
     }
 }

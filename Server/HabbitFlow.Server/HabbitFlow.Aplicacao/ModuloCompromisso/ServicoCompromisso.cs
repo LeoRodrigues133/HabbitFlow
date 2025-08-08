@@ -1,8 +1,8 @@
-using FluentResults;
-using HabbitFlow.Aplicacao.Compartilhado;
-using HabbitFlow.Dominio.Compartilhado;
-using HabbitFlow.Dominio.ModuloCompromisso;
 using Serilog;
+using FluentResults;
+using HabbitFlow.Dominio.Compartilhado;
+using HabbitFlow.Aplicacao.Compartilhado;
+using HabbitFlow.Dominio.ModuloCompromisso;
 
 namespace HabbitFlow.Aplicacao.ModuloCompromisso;
 

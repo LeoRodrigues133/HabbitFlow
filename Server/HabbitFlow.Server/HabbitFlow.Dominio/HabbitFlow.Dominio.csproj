@@ -18,8 +18,4 @@
     <PackageReference Include="SequentialGuidGenerator" Version="1.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ModuloContato\NewFolder\" />
-  </ItemGroup>
-
 </Project>
