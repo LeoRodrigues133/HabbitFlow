@@ -1,6 +1,7 @@
 ﻿using HabbitFlow.Dominio.Compartilhado;
 using HabbitFlow.Dominio.ModuloAuth;
 using HabbitFlow.Dominio.ModuloCategoria;
+using HabbitFlow.Dominio.ModuloCompromisso;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -88,9 +89,11 @@ public class HabbitFlowDbContext : IdentityDbContext<Usuario, IdentityRole<Guid>
         builder.ApplyConfigurationsFromAssembly(dllConfigurationOrm);
 
         //builder.Entity<Categoria>().HasQueryFilter(c => c.UsuarioId == usuarioId);
+        //builder.Entity<Compromisso>().HasQueryFilter(c => c.UsuarioId == usuarioId);
         // Para os testes, é necessário não utilizar HasQueryFilter por enquanto.
 
         builder.Entity<Categoria>();
+        builder.Entity<Compromisso>();
 
         base.OnModelCreating(builder);
     }

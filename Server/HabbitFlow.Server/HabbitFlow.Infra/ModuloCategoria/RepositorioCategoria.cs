@@ -5,19 +5,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HabbitFlow.Infra.ModuloCategoria;
 
-public class RepositorioCategoria : Repositorio<Categoria>, IRepositorioCategoria
+public class RepositorioCategoria : RepositorioBase<Categoria>, IRepositorioCategoria
 {
     public RepositorioCategoria(IPersistContext context) : base(context)
-    {
-    }
+    {}
 
     public override Categoria SelecionarPorId(Guid id)
     {
-        return _dbSet.Include(x => x.Compromissos).SingleOrDefault(x => x.Id == id)!;
+        return _registros.Include(x => x.Compromissos).SingleOrDefault(x => x.Id == id)!;
     }
 
     public override List<Categoria> SelecionarTodos()
     {
-        return _dbSet.Include(x => x.Compromissos).ToList();
+        return _registros.Include(x => x.Compromissos).ToList();
     }
 }
