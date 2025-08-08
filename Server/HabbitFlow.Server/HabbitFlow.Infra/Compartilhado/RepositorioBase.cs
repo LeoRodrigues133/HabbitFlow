@@ -3,62 +3,59 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HabbitFlow.Infra.Compartilhado;
 
-public class Repositorio<T> where T : EntidadeBase<T>
+public class RepositorioBase<T> where T : EntidadeBase<T>
 {
-    protected HabbitFlowDbContext _habbitFlowDbContext;
-    protected DbSet<T> _dbSet;
+    protected DbSet<T> _registros;
+    private readonly HabbitFlowDbContext _habbitFlowDbContext;
 
-    public Repositorio(IPersistContext context)
+    public RepositorioBase(IPersistContext context)
     {
-        this._habbitFlowDbContext = (HabbitFlowDbContext?)context;
-        this._dbSet = _habbitFlowDbContext.Set<T>();
+        _habbitFlowDbContext = (HabbitFlowDbContext)context;
+        _registros = _habbitFlowDbContext.Set<T>();
     }
 
     public virtual async Task<bool> CadastrarAsync(T entity)
     {
-        await _dbSet.AddAsync(entity);
-
-        await _habbitFlowDbContext.SaveChangesAsync();
-
+        await _registros.AddAsync(entity);
         return true;
     }
 
     public virtual async Task<T> SelecionarPorIdAsync(Guid id)
     {
-        return await _dbSet.SingleOrDefaultAsync(x => x.Id == id);
+        return await _registros.SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public virtual async Task<List<T>> SelecionarTodosAsync()
     {
-        return await _dbSet.ToListAsync();
+        return await _registros.ToListAsync();
     }
 
     public virtual void Cadastrar(T entity)
     {
-        _dbSet.Add(entity);
+        _registros.Add(entity);
     }
 
     public virtual void Editar(T entity)
     {
-        _dbSet.Update(entity);
+        _registros.Update(entity);
 
         _habbitFlowDbContext.SaveChanges();
     }
 
     public virtual void Excluir(T entity)
     {
-        _dbSet.Remove(entity);
+        _registros.Remove(entity);
 
         _habbitFlowDbContext.SaveChanges();
     }
 
     public virtual T SelecionarPorId(Guid id)
     {
-        return _dbSet.SingleOrDefault(x => x.Id == id)!;
+        return _registros.SingleOrDefault(x => x.Id == id)!;
     }
 
     public virtual List<T> SelecionarTodos()
     {
-        return _dbSet.ToList();
+        return _registros.ToList();
     }
 }

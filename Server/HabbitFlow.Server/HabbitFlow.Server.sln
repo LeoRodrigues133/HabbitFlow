@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Infra", "HabbitF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Aplicacao", "HabbitFlow.Aplicacao\HabbitFlow.Aplicacao.csproj", "{8D0DC7D5-2F01-4B92-B634-91DF5D3CB2EE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Testes", "6. Testes", "{1C724AE1-8F1C-4760-988F-5AAF78285074}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Infra.Tests", "HabbitFlow.Infra.Tests\HabbitFlow.Infra.Tests.csproj", "{DDE3FE5A-19FD-4451-9638-CC0C706C2AB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,10 @@ Global
 		{8D0DC7D5-2F01-4B92-B634-91DF5D3CB2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D0DC7D5-2F01-4B92-B634-91DF5D3CB2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D0DC7D5-2F01-4B92-B634-91DF5D3CB2EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDE3FE5A-19FD-4451-9638-CC0C706C2AB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDE3FE5A-19FD-4451-9638-CC0C706C2AB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDE3FE5A-19FD-4451-9638-CC0C706C2AB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDE3FE5A-19FD-4451-9638-CC0C706C2AB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +51,7 @@ Global
 		{D3EB42C6-5EE1-4194-B6F5-06396A154F9A} = {DFB6BEAA-3D9C-40CC-82AC-F89708C428C4}
 		{8963B996-3EC2-48A0-ADC3-681FE2B68CB9} = {55473959-15A2-49C2-98C9-3B276B851B61}
 		{8D0DC7D5-2F01-4B92-B634-91DF5D3CB2EE} = {E363F3F9-4D5A-43B5-A3B1-015E534C41FE}
+		{DDE3FE5A-19FD-4451-9638-CC0C706C2AB9} = {1C724AE1-8F1C-4760-988F-5AAF78285074}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0CFDEEE2-0BDD-47E7-9209-93787BEF6C8F}

@@ -12,6 +12,6 @@ public abstract class EntidadeBase<T>
         Id = SequentialGuid.NewGuid();
     }
 
-    public Usuario? Usuario { get; set; }
-    public Guid usuarioId { get; set; }
+    public Usuario Usuario { get; set; }
+    public Guid UsuarioId { get; set; }
 }

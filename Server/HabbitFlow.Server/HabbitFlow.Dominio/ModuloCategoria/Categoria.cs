@@ -19,5 +19,8 @@ public class Categoria : EntidadeBase<Categoria>
         Titulo = titulo;
     }
 
-
+    public override string ToString()
+    {
+        return $"Titulo: {Titulo}";
+    }
 }

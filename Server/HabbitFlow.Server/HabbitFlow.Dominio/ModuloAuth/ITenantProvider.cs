@@ -2,5 +2,5 @@ namespace HabbitFlow.Dominio.ModuloAuth;
 
 public interface ITenantProvider
 {
-    Guid? UsuarioId { get; }
+    Guid UsuarioId { get; }
 }

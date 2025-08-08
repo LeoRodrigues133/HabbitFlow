@@ -2,7 +2,7 @@
 using FluentValidation;
 using Serilog;
 
-namespace HabbitFlow.Aplicacao;
+namespace HabbitFlow.Aplicacao.Compartilhado;
 public abstract class ServicoBase<TDomain, TValidator> where TValidator : AbstractValidator<TDomain>, new()
 {
     protected virtual Result Validar(TDomain domain)
