@@ -1,14 +1,14 @@
-﻿using HabbitFlow.Dominio.Compartilhado;
+﻿using Serilog;
+using System.Reflection;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using HabbitFlow.Dominio.ModuloAuth;
+using Microsoft.AspNetCore.Identity;
+using HabbitFlow.Dominio.ModuloContato;
+using HabbitFlow.Dominio.Compartilhado;
 using HabbitFlow.Dominio.ModuloCategoria;
 using HabbitFlow.Dominio.ModuloCompromisso;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using System.Reflection;
-using System.Reflection.Emit;
 
 namespace HabbitFlow.Infra.Compartilhado;
 
@@ -16,14 +16,11 @@ public class HabbitFlowDbContext : IdentityDbContext<Usuario, IdentityRole<Guid>
 {
     private Guid _usuarioId;
 
-    public HabbitFlowDbContext(DbContextOptions options, ITenantProvider tenantProvider = null) : base(options)
+    public HabbitFlowDbContext(DbContextOptions<HabbitFlowDbContext> options, ITenantProvider tenantProvider = null) : base(options)
     {
         if (tenantProvider != null)
             _usuarioId = tenantProvider.UsuarioId;
     }
-
-    public HabbitFlowDbContext()
-    { }
 
     public async Task<bool> SaveContextAsync()
     {
@@ -69,7 +66,6 @@ public class HabbitFlowDbContext : IdentityDbContext<Usuario, IdentityRole<Guid>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-
         ILoggerFactory loggerFactory = LoggerFactory.Create((x) =>
         {
             x.AddSerilog(Log.Logger);
@@ -88,12 +84,14 @@ public class HabbitFlowDbContext : IdentityDbContext<Usuario, IdentityRole<Guid>
 
         builder.ApplyConfigurationsFromAssembly(dllConfigurationOrm);
 
-        //builder.Entity<Categoria>().HasQueryFilter(c => c.UsuarioId == usuarioId);
-        //builder.Entity<Compromisso>().HasQueryFilter(c => c.UsuarioId == usuarioId);
-        // Para os testes, é necessário não utilizar HasQueryFilter por enquanto.
+        //builder.Entity<Categoria>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
+        //builder.Entity<Compromisso>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
+        //builder.Entity<Contato>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
+        //// Para os testes, é necessário não utilizar HasQueryFilter por enquanto.
 
         builder.Entity<Categoria>();
         builder.Entity<Compromisso>();
+        builder.Entity<Contato>();
 
         base.OnModelCreating(builder);
     }

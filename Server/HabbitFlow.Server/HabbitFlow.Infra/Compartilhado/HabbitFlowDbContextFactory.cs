@@ -15,7 +15,7 @@ public class HabbitFlowDbContextFactory : IDesignTimeDbContextFactory<HabbitFlow
             .AddJsonFile("appsettings.json")
             .Build();
 
-        string connectionString = config.GetConnectionString("Default")!;
+        string connectionString = config.GetConnectionString("SqlServer")!;
 
         builder.UseSqlServer(connectionString);
 

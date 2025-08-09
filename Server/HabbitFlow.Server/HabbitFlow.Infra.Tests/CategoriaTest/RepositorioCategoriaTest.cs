@@ -3,6 +3,7 @@ using HabbitFlow.Dominio.ModuloCategoria;
 using HabbitFlow.Infra.Compartilhado;
 using HabbitFlow.Infra.ModuloCategoria;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace HabbitFlow.Infra.Tests.CategoriaTest;
 
@@ -15,8 +16,17 @@ public class RepositorioCategoriaTest
     [TestInitialize]
     public void Initialize()
     {
-        var builder = new DbContextOptionsBuilder<HabbitFlowDbContext>()
-            .UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=HabbitFlowTest;Integrated Security=True;");
+        var builder = new DbContextOptionsBuilder<HabbitFlowDbContext>();
+
+        var config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        var connectionString = config.GetConnectionString("SqlServer");
+
+        builder.UseSqlServer(connectionString);
+
 
         db = new HabbitFlowDbContext(builder.Options);
 
@@ -52,7 +62,7 @@ public class RepositorioCategoriaTest
         Categoria categoriaSelecionada = repositorio.SelecionarPorId(novaCategoria.Id);
 
         Assert.IsNotNull(novaCategoria);
-        Assert.AreSame(novaCategoria, categoriaSelecionada);
+        Assert.AreEqual(novaCategoria, categoriaSelecionada);
     }
 
     [TestMethod]

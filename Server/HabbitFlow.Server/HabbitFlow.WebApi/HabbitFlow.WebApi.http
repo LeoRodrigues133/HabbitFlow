@@ -1,0 +1,6 @@
+@HabbitFlow.WebApi_Host = https://localhost:7777
+
+GET {{HabbitFlow.WebApi_Host}}/weatherforecast/
+Accept: application/json
+
+###

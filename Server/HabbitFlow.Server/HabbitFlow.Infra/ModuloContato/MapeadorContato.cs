@@ -35,6 +35,6 @@ public class MapeadorContato : IEntityTypeConfiguration<Contato>
         builder.HasMany(c => c.Compromissos)
                .WithOne(c => c.Contato)
                .HasForeignKey("ContatoId")
-               .OnDelete(DeleteBehavior.Cascade);
+               .OnDelete(DeleteBehavior.NoAction);
     }
 }
