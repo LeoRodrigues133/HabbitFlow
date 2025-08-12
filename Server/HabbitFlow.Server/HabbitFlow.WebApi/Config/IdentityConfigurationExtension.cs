@@ -1,6 +1,7 @@
 ﻿using HabbitFlow.Aplicacao.ModuloCategoria;
 using HabbitFlow.Dominio.ModuloAuth;
 using HabbitFlow.Infra.Compartilhado;
+using HabbitFlow.WebApi.Config.IdentityConfiguration;
 using Microsoft.AspNetCore.Identity;
 
 namespace HabbitFlow.WebApi.Config;
@@ -15,7 +16,8 @@ public static class IdentityConfigurationExtension
             opt.User.RequireUniqueEmail = true;
         })
             .AddEntityFrameworkStores<HabbitFlowDbContext>()
-            .AddDefaultTokenProviders();
+            .AddDefaultTokenProviders()
+            .AddErrorDescriber<IdentityErrorDecriberExtension>();
 
     }
 }

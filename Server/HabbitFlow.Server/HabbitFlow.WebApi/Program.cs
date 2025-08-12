@@ -13,7 +13,8 @@ public class Program
         builder.Services.ConfiguracaoIdentity();
         builder.Services.ConfigurarAutoMapper();
         builder.Services.ConfigurarInjecaoDependencia(builder.Configuration);
-        ;
+        builder.Services.ConfigurarJwt();
+        builder.Services.ConfigurarSwagger();
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
@@ -21,15 +22,15 @@ public class Program
 
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+
+        app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
 
         app.UseHttpsRedirection();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
 

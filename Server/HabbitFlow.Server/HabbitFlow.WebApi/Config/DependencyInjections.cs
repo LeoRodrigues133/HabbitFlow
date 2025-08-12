@@ -11,7 +11,7 @@ public static class DependencyInjections
 {
     public static void ConfigurarInjecaoDependencia(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("SqlServer");
+        var connectionString = configuration["SQL_SERVER_CONNECTION_STRING"];
 
         services.AddDbContext<IPersistContext, HabbitFlowDbContext>(optionsBuilder =>
         {
