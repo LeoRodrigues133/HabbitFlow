@@ -108,15 +108,15 @@ public class ServicoCompromisso : ServicoBase<Compromisso, CompromissoValidation
         }
     }
 
-    public Result<Compromisso> SelecionaPorId(Guid id)
+    public async Task<Result<Compromisso>> SelecionarPorIdAsync(Guid id)
     {
         Log.Logger.Debug($"Tentando selecionar compromisso com id: [{id}]");
 
         try
         {
-            var compromisso = _repositorioCompromisso.SelecionarPorId(id);
+            var compromisso = await _repositorioCompromisso.SelecionarPorIdAsync(id);
 
-            if (compromisso == null)
+            if (compromisso is null)
             {
                 Log.Logger.Warning($"Compromisso id: [{id}] não encontrada.");
 
@@ -138,13 +138,13 @@ public class ServicoCompromisso : ServicoBase<Compromisso, CompromissoValidation
         }
     }
 
-    public Result<List<Compromisso>> SelecionarTodos()
+    public async Task<Result<List<Compromisso>>> SelecionarTodosAsync()
     {
         Log.Logger.Debug("Tentando selecionar compromisso");
 
         try
         {
-            var compromisso = _repositorioCompromisso.SelecionarTodos();
+            var compromisso = await _repositorioCompromisso.SelecionarTodosAsync();
 
             Log.Logger.Information($"Compromisso selecionadas com sucesso");
 
@@ -155,6 +155,94 @@ public class ServicoCompromisso : ServicoBase<Compromisso, CompromissoValidation
             string error = "Falha ao tentar selecionar Compromisso no sistema.";
 
             Log.Logger.Error(ex, error);
+
+            return Result.Fail(error);
+        }
+    }
+    public async Task<Result<Compromisso>> CadastrarAsync(Compromisso compromisso)
+    {
+        Log.Logger.Debug($"Tentando cadastrar compromisso {compromisso}");
+
+        Result result = await ValidarAsync(compromisso);
+
+        if (result.IsFailed)
+            return Result.Fail(result.Errors);
+
+        try
+        {
+            await _repositorioCompromisso.CadastrarAsync(compromisso);
+
+            _persistContext.SaveContextChanges();
+
+            Log.Logger.Information($"Compromisso {compromisso} cadastrado com sucesso!");
+
+            return Result.Ok(compromisso);
+        }
+        catch (Exception ex)
+        {
+            _persistContext.UndoContextChanges();
+
+            string error = "Falha ao tentar cadastrar compromisso no sistema";
+
+            Log.Logger.Error(ex, error + $"{compromisso}");
+
+            return Result.Fail(error);
+        }
+    }
+
+    public async Task<Result<Compromisso>> EditarAsync(Compromisso compromisso)
+    {
+        Log.Logger.Debug($"Tentando editar compromisso {compromisso}");
+
+        var result = await ValidarAsync(compromisso);
+
+        if (result.IsFailed)
+            return Result.Fail(result.Errors);
+
+        try
+        {
+            _repositorioCompromisso.Editar(compromisso);
+
+            _persistContext.SaveContextChanges();
+
+            Log.Logger.Information($"Compromisso {compromisso} editada com sucesso!");
+        }
+        catch (Exception ex)
+        {
+            _persistContext.UndoContextChanges();
+
+            string error = "Falha ao tentar editar compromisso no sistema.";
+
+            Log.Logger.Error(ex, error + $"{compromisso}");
+
+            return Result.Fail(error);
+        }
+
+        return Result.Ok(compromisso);
+    }
+
+    public async Task<Result<Compromisso>> ExcluirAsync(Compromisso compromisso)
+    {
+        Log.Logger.Debug($"Tentando excluir a compromisso {compromisso}");
+
+        try
+        {
+            _repositorioCompromisso.Excluir(compromisso);
+
+            _persistContext.SaveContextChanges();
+
+            Log.Logger.Information($"Compromisso {compromisso} excluida com sucesso!");
+
+            return Result.Ok();
+
+        }
+        catch (Exception ex)
+        {
+            _persistContext.UndoContextChanges();
+
+            string error = "Falha ao tentar excluir a compromisso do sistema.";
+
+            Log.Logger.Error(ex, error + $"{compromisso}");
 
             return Result.Fail(error);
         }

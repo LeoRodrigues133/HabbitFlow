@@ -7,6 +7,7 @@ public static class AutoMapperExtensions
         {
             opt.AddProfile<UsuarioProfile>();
             opt.AddProfile<CategoriaProfile>();
+            opt.AddProfile<CompromissoProfile>();
         });
 
         services.AddTransient<UsuarioResolver>();

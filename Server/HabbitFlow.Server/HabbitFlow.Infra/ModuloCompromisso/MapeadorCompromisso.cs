@@ -50,7 +50,7 @@ public class MapeadorCompromisso : IEntityTypeConfiguration<Compromisso>
             .HasOne(x => x.Categoria)
             .WithMany(x => x.Compromissos)
             .HasForeignKey(x => x.CategoriaId)
-            .IsRequired()
+            .IsRequired(false)
             .OnDelete(DeleteBehavior.NoAction);
 
         builder

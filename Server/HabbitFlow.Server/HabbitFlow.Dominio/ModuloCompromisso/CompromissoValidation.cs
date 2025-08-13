@@ -22,10 +22,6 @@ public class CompromissoValidation : AbstractValidator<Compromisso>
             .Must(data => data > DateTime.Now)
             .WithMessage("A data do compromisso deve ser futura.");
 
-        RuleFor(x => x.Hora)
-            .NotEmpty()
-            .WithMessage("A hora de início é obrigatória.");
-
         RuleFor(x => x.Local)
             .NotEmpty()
             .When(x => x.TipoEnum == TipoCompromissoEnum.Presencial)
