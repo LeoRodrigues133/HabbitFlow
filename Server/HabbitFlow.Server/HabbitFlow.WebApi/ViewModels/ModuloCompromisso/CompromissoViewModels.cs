@@ -12,6 +12,7 @@ public abstract class CompromissoViewModels
         public DateTime Data { get; set; }
         public DateTime? Hora { get; set; }
         public Guid? ContatoId { get; set; }
+        public Guid? CategoriaId { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
     }
 
@@ -24,6 +25,7 @@ public abstract class CompromissoViewModels
         public DateTime? Hora { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
         public Guid? ContatoId { get; set; }
+        public Guid? CategoriId { get; set; }
     }
 
     public class EditarCompromissoViewModel
@@ -35,6 +37,7 @@ public abstract class CompromissoViewModels
         public DateTime? Hora { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
         public Guid? ContatoId { get; set; }
+        public Guid? CategoriaId { get; set; }
     }
 
     public class ExcluirCompromissoViewModel
@@ -47,5 +50,6 @@ public abstract class CompromissoViewModels
         public DateTime? Hora { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
         public Guid? ContatoId { get; set; }
+        public Guid? CategoriaId { get; set; }
     }
 }

@@ -19,7 +19,7 @@ public class CompromissoValidation : AbstractValidator<Compromisso>
         RuleFor(x => x.Data)
             .NotEmpty()
             .WithMessage("A data do compromisso é obrigatória.")
-            .Must(data => data > DateTime.Now)
+            .Must(data => data >= DateTime.Today)
             .WithMessage("A data do compromisso deve ser futura.");
 
         RuleFor(x => x.Local)

@@ -19,6 +19,7 @@ public class Compromisso : EntidadeBase<Compromisso>
         DateTime? hora,
         string conteudo,
         Contato? contato,
+        Categoria? categoria,
         TipoCompromissoEnum tipoEnum
         //,        int tempoEstimado
         // Implemento mais tarde...
@@ -30,6 +31,7 @@ public class Compromisso : EntidadeBase<Compromisso>
         Local = local;
         Titulo = titulo;
         Contato = contato;
+        Categoria = categoria;
         Conteudo = conteudo;
         TipoEnum = tipoEnum;
         //TempoEstimado = tempoEstimado;
