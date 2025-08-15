@@ -1,12 +1,15 @@
 ﻿using HabbitFlow.Aplicacao.ModuloCategoria;
 using HabbitFlow.Aplicacao.ModuloCompromisso;
+using HabbitFlow.Aplicacao.ModuloTarefa;
 using HabbitFlow.Dominio.Compartilhado;
 using HabbitFlow.Dominio.ModuloAuth;
 using HabbitFlow.Dominio.ModuloCategoria;
 using HabbitFlow.Dominio.ModuloCompromisso;
+using HabbitFlow.Dominio.ModuloTarefa;
 using HabbitFlow.Infra.Compartilhado;
 using HabbitFlow.Infra.ModuloCategoria;
 using HabbitFlow.Infra.ModuloCompromisso;
+using HabbitFlow.Infra.ModuloTarefa;
 using Microsoft.EntityFrameworkCore;
 
 namespace HabbitFlow.WebApi.Config;
@@ -28,5 +31,8 @@ public static class DependencyInjections
 
         services.AddTransient<IRepositorioCompromisso, RepositorioCompromisso>();
         services.AddTransient<ServicoCompromisso>();
+
+        services.AddTransient<IRepositorioTarefa, RepositorioTarefa>();
+        services.AddTransient<ServicoTarefa>();
     }
 }

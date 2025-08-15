@@ -101,4 +101,8 @@ public class Compromisso : EntidadeBase<Compromisso>
         }
     }
 
+    public override string ToString()
+    {
+        return Titulo;
+    }
 }

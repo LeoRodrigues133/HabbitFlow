@@ -8,6 +8,8 @@ public static class AutoMapperExtensions
             opt.AddProfile<UsuarioProfile>();
             opt.AddProfile<CategoriaProfile>();
             opt.AddProfile<CompromissoProfile>();
+            opt.AddProfile<TarefaProfile>();
+            opt.AddProfile<SubtarefaProfile>();
         });
 
         services.AddTransient<UsuarioResolver>();
