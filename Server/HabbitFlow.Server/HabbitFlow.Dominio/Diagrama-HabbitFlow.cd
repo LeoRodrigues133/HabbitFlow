@@ -1,30 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="HabbitFlow.Dominio.Compartilhado.EntidadeBase&lt;T&gt;">
-    <Position X="11" Y="0.5" Width="1.5" />
+    <Position X="9.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Compartilhado\EntidadeBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HabbitFlow.Dominio.ModuloTarefa.Tarefa">
-    <Position X="6.25" Y="3.75" Width="1.75" />
+    <Position X="5" Y="3.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAgAAAIAAAAAAAAAAACAAAAEAAIAAAAAQAAAAAAAABA=</HashCode>
+      <HashCode>AAgAAAIAAAAAAAAEAACAAAAEAAIAAAAAQAAAAAAAABA=</HashCode>
       <FileName>ModuloTarefa\Tarefa.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Subtarefas" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="HabbitFlow.Dominio.ModuloAuth.Usuario" Collapsed="true">
-    <Position X="14.75" Y="0.75" Width="1.5" />
+    <Position X="17.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>ModuloAuth\Usuario.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HabbitFlow.Dominio.ModuloCompromisso.Compromisso">
-    <Position X="11.75" Y="3.75" Width="2.5" />
+    <Position X="10.75" Y="3.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgCAAJAAAEAIgAAAAAAAAAEBAABAAgAAAQAAEAFA=</HashCode>
+      <HashCode>AAAAgCAAJAAAEAIkAAAAAAAAAEBAABAAgAAAQAAEAFA=</HashCode>
       <FileName>ModuloCompromisso\Compromisso.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -33,7 +36,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="HabbitFlow.Dominio.ModuloCategoria.Categoria">
-    <Position X="8.75" Y="3.75" Width="2.25" />
+    <Position X="7.75" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>ModuloCategoria\Categoria.cs</FileName>
@@ -43,7 +46,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="HabbitFlow.Dominio.ModuloContato.Contato">
-    <Position X="15" Y="3.75" Width="2.25" />
+    <Position X="14" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAgGAAAAAEAAAAAAAAAAAAAAABAAAAAAEAAAA=</HashCode>
       <FileName>ModuloContato\Contato.cs</FileName>
@@ -52,11 +55,11 @@
       <Property Name="Compromissos" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="HabbitFlow.Dominio.ModuloTarefa.SubTarefa">
-    <Position X="3" Y="2.75" Width="2.25" />
+  <Class Name="HabbitFlow.Dominio.ModuloSubtarefa.SubTarefa">
+    <Position X="1.75" Y="3.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAACCAQAAQAAAABAAgAIAAAAAAAAAAAAAAAAAAQAABA=</HashCode>
-      <FileName>ModuloTarefa\Subtarefa.cs</FileName>
+      <HashCode>AAACCAQAAQAAAABEAgAIAAAAAAAAAAAAAAAAAAQAABA=</HashCode>
+      <FileName>ModuloSubtarefa\Subtarefa.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Tarefa" />

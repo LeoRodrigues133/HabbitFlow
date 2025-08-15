@@ -11,7 +11,7 @@ public class Tarefa : EntidadeBase<Tarefa>
         Subtarefas = new List<SubTarefa>();
     }
 
-    public Tarefa(string titulo)
+    public Tarefa(string titulo) : this()
     {
         Titulo = titulo;
     }
