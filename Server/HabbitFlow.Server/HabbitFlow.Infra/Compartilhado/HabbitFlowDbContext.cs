@@ -84,14 +84,14 @@ public class HabbitFlowDbContext : IdentityDbContext<Usuario, IdentityRole<Guid>
 
         builder.ApplyConfigurationsFromAssembly(dllConfigurationOrm);
 
-        //builder.Entity<Categoria>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
-        //builder.Entity<Compromisso>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
-        //builder.Entity<Contato>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
+        builder.Entity<Categoria>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
+        builder.Entity<Compromisso>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
+        builder.Entity<Contato>().HasQueryFilter(c => c.UsuarioId == _usuarioId);
         //// Para os testes, é necessário não utilizar HasQueryFilter por enquanto.
 
-        builder.Entity<Categoria>();
-        builder.Entity<Compromisso>();
-        builder.Entity<Contato>();
+        //builder.Entity<Categoria>();
+        //builder.Entity<Compromisso>();
+        //builder.Entity<Contato>();
 
         base.OnModelCreating(builder);
     }
