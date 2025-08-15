@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.AppConsole", "Ha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.WebApi", "HabbitFlow.WebApi\HabbitFlow.WebApi.csproj", "{C51C0667-8CEF-40E1-B90C-77B4359EE558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Domain.test", "HabbitFlow.Domain.test\HabbitFlow.Domain.test.csproj", "{C6555E50-8F1E-4F5A-BA41-1DA4B3628D13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Domain.Tests", "HabbitFlow.Domain.test\HabbitFlow.Domain.Tests.csproj", "{C6555E50-8F1E-4F5A-BA41-1DA4B3628D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
