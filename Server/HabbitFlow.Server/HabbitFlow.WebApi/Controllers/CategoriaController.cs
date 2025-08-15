@@ -10,7 +10,7 @@ namespace HabbitFlow.WebApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class CategoriaController : ExtensionControllerBase
+public class CategoriaController : ControllerBaseExtension
 {
     readonly ServicoCategoria _servicoCategoria;
     readonly IMapper _mapper;

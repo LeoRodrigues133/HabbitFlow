@@ -152,7 +152,7 @@ public class ServicoCompromisso : ServicoBase<Compromisso, CompromissoValidation
         }
         catch (Exception ex)
         {
-            string error = "Falha ao tentar selecionar Compromisso no sistema.";
+            string error = "Falha ao tentar selecionar compromissos no sistema.";
 
             Log.Logger.Error(ex, error);
 

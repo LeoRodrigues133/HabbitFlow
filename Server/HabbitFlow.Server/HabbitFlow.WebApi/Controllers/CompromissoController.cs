@@ -10,7 +10,7 @@ namespace HabbitFlow.WebApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class CompromissoController : ExtensionControllerBase
+public class CompromissoController : ControllerBaseExtension
 {
     readonly ServicoCompromisso _servicoCompromisso;
     readonly IMapper _mapper;

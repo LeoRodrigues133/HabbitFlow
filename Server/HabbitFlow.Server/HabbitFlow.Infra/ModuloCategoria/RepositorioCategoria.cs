@@ -10,12 +10,12 @@ public class RepositorioCategoria : RepositorioBase<Categoria>, IRepositorioCate
     public RepositorioCategoria(IPersistContext context) : base(context)
     {}
 
-    public override Categoria SelecionarPorId(Guid id)
+    public override async Task<Categoria> SelecionarPorIdAsync(Guid id)
     {
         return _registros.Include(x => x.Compromissos).SingleOrDefault(x => x.Id == id)!;
     }
 
-    public override List<Categoria> SelecionarTodos()
+    public override async Task<List<Categoria>> SelecionarTodosAsync()
     {
         return _registros.Include(x => x.Compromissos).ToList();
     }

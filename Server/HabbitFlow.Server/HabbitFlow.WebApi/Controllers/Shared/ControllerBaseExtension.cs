@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace HabbitFlow.WebApi.Controllers.Shared;
-public class ExtensionControllerBase : ControllerBase
+public class ControllerBaseExtension : ControllerBase
 {
     protected IActionResult ProcessarResultado(Result result, object viewModel = null)
     {

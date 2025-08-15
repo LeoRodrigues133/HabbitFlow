@@ -11,12 +11,12 @@ public class RepositorioContato : RepositorioBase<Contato>
     {
     }
 
-    public override Contato SelecionarPorId(Guid id)
+    public override async Task<Contato> SelecionarPorIdAsync(Guid id)
     {
-        return _registros.Include(x=>x.Compromissos).SingleOrDefault( x=> x.Id == id);
+        return _registros.Include(x => x.Compromissos).SingleOrDefault(x => x.Id == id);
     }
 
-    public override List<Contato> SelecionarTodos()
+    public override async Task<List<Contato>> SelecionarTodosAsync()
     {
         return _registros.Include(x => x.Compromissos).ToList();
     }

@@ -10,7 +10,7 @@ using static HabbitFlow.WebApi.ViewModels.ModuloAuth.AuthViewModels;
 namespace HabbitFlow.WebApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
-public class AutenticacaoController : ExtensionControllerBase
+public class AutenticacaoController : ControllerBaseExtension
 {
     readonly ServicoAuth _servicoAuth;
     readonly IMapper _mapeador;

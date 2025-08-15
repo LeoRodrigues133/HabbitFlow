@@ -9,14 +9,14 @@ public class RepositorioCompromisso : RepositorioBase<Compromisso>, IRepositorio
 {
     public RepositorioCompromisso(IPersistContext context) : base(context)
     {}
-    public override Compromisso SelecionarPorId(Guid id)
+    public override async Task<Compromisso> SelecionarPorIdAsync(Guid id)
     {
         return _registros
             .Include(x => x.Contato)
             .SingleOrDefault(x => x.Id == id);
     }
 
-    public override List<Compromisso> SelecionarTodos()
+    public override async Task<List<Compromisso>> SelecionarTodosAsync()
     {
         return _registros
             .Include(x => x.Contato)
