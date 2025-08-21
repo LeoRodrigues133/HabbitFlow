@@ -1,5 +1,5 @@
 # HabbitFlow
-![My Skills](https://skillicons.dev/icons?i=dotnet,mysql,cs,nodejs,typescript,angular,cypress)
+![My Skills](https://skillicons.dev/icons?i=dotnet,mysql,cs,nodejs,typescript,angular)
 
 ---
 
