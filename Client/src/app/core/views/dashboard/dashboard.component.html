@@ -1,0 +1,52 @@
+<main class="container px-5">
+  <div class="row row-cols-1 mt-3">
+
+    <mat-grid-list cols="5" gutterSize="20px">
+
+      <mat-grid-tile rowspan="1" colspan="2" class="rounded-2 mat-elevation-z3">
+
+        <mat-grid-tile-header class="justify-content-between">
+          Resumo
+        </mat-grid-tile-header>
+
+        <div class="d-flex gap-4 mt-4 text-center">
+          <div *ngFor="let resumo of Resumos">
+            <h2 class="mb-1">{{ resumo.quantidade }}</h2>
+            <small>{{resumo.titulo}}</small>
+          </div>
+        </div>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="2" colspan="2" class="rounded-3 mat-elevation-z3">
+
+        <mat-grid-tile-header>
+          Calendário
+        </mat-grid-tile-header>
+        <mat-card class="calendar-card">
+          <mat-calendar [selected]="selectedDate"></mat-calendar>
+        </mat-card>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="1" colspan="2" class="rounded-3 mat-elevation-z3">
+        <app-listagem-compromissos></app-listagem-compromissos>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile rowspan="1" colspan="2" class="rounded-3 mat-elevation-z3">
+        <app-listagem-tarefas></app-listagem-tarefas>
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="1" colspan="2" class="rounded-3 mat-elevation-z3">
+        <app-listagem-categoria></app-listagem-categoria>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+  </div>
+</main>
+
+
+<!-- Acho que o layout é esse... -->
+<!-- Os comentários são para eu não esquecer oque tava pensando quando criei -->

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use "bootstrap/scss/bootstrap-reboot";
+@use "bootstrap/scss/bootstrap-grid";
+@use "bootstrap/scss/bootstrap-utilities";
+@use "app/assets/css/matElevation.css"; //Mat elevation não funciona nessa versão;
+                                        //Sobrescrevi para poder utilizar a funcionalidade;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.app-custom-button-color {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #89b582e0 !important;
+}
+.app-custom-flat-button-color {
+  background-color: #89b582ce !important;
+  color: #000000 !important;
+}
+.app-custom-button-color-50 {
+  color: #6e4ba4 !important;
+}
+.app-custom-button-color-50:hover {
+  background-color: #89b5827e !important;
+}

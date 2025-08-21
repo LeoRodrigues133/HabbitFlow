@@ -1,0 +1,84 @@
+<mat-sidenav-container class="sidenav-container bg-body-secondary">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar>
+      <img src="/logo.png" style="width: 60px; height: 60px;">
+      {{ title }}
+    </mat-toolbar>
+
+
+    <mat-nav-list>
+
+      <!-- Links públicos -->
+      <ng-container *ngIf="!usuarioAutenticado">
+
+        <a *ngFor="let link of Links" mat-list-item [routerLink]="link.rota">
+          <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
+          {{ link.titulo }}
+        </a>
+      </ng-container>
+      <!-- Links públicos -->
+
+      <!-- Links autenticados -->
+      <ng-container *ngIf="usuarioAutenticado">
+
+        <a *ngFor="let link of LinksAuteticados" mat-list-item [routerLink]="link.rota" class="app-flat-nav-item ">
+          <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
+          {{ link.titulo }}
+        </a>
+      </ng-container>
+      <!-- Links autenticados -->
+
+      <!-- Categorias com Accordion -->
+
+      <ng-container *ngIf="usuarioAutenticado" >
+
+        <mat-accordion class="app-flat-accordion">
+          <mat-expansion-panel *ngFor="let link of Acordion">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="gap-3" mat-list-item>
+                <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
+                {{ link.titulo }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <a *ngFor="let item of Categorias"
+            mat-list-item
+            class="app-flat-nav-item app-titulo-item">
+            <mat-icon matListItemIcon>drag_handle</mat-icon>
+              {{ item }}
+            </a>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-container>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Categorias com Accordion -->
+
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+
+      <span *ngIf="usuarioAutenticado" class="d-flex ms-auto gap-3">
+        <span>Olá, {{ usuarioAutenticado.nome}}
+
+          <button (click)="logoutEfetuado()" mat-button class="app-custom-flat-button-color">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </span>
+
+      </span>
+      @if (isHandset$ | async) {
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      }
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

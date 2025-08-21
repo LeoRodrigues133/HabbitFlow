@@ -1,0 +1,41 @@
+<main class="container my-4">
+  <div class="row justify-content-center g-3 mt-2">
+    <div class="col col-md-10 col-lg-6">
+      <h1 class="display-3">Login de Usuário</h1>
+      <hr />
+      <form [formGroup]="form" (submit)="AutenticarUsuario()">
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Nome de Usuário</mat-label>
+          <input formControlName="login" matInput autocomplete="username" placeholder="Ex: JoãoSilva12" />
+          <mat-icon matSuffix color="primary">login</mat-icon>
+          <mat-error class="text-white" *ngIf="login?.invalid">
+            <span *ngIf="login?.errors?.['required']">O login precisa ser preenchido.</span>
+            <span *ngIf="login?.errors?.['minlength']">O login deve conter ao menos 3 caracteres.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Senha</mat-label>
+          <input formControlName="senha" matInput autocomplete="new-password" type="password"
+            placeholder="A senha precisa conter ao menos 6 caracteres" />
+          <mat-icon matSuffix color="primary">password</mat-icon>
+          <mat-error class="text-white" *ngIf="senha?.invalid">
+            <span *ngIf="senha?.errors?.['required']" Componente de Login>A senha precisa ser preenchida.</span>
+            <span *ngIf="senha?.errors?.['minlength']">A senha deve conter ao menos 6 caracteres.</span>
+          </mat-error>
+        </mat-form-field>
+        <div class="row justify-content-end g-2 gap-2 mt-5">
+          <button type="submit" mat-flat-button class="col-sm-4 app-custom-button-color">
+            <mat-icon matIconPrefix>login</mat-icon>
+            Login
+          </button>
+          <a mat-button type="button" class="col-sm-4 app-custom-button-color-50" routerLink="/registrar">
+            <mat-icon matIconPrefix>person_add</mat-icon>
+            Não tenho uma conta
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

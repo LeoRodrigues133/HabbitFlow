@@ -1,0 +1,65 @@
+.sidenav-container { height: 100%; }
+
+.sidenav {
+  background: rgba(111, 75, 164, 0.25);
+  width: 200px;
+  border-radius: 0;
+}
+
+.sidenav .mat-toolbar {
+  background-color: rgba(137, 181, 130, 0.75);
+}
+
+.mat-toolbar.mat-primary {
+  background: #c5bddb;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.app-flat-nav-item {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-flat-accordion .mat-expansion-panel {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.app-flat-accordion .mat-expansion-panel-header {
+  padding-left: 15px;
+  font-weight: 400;
+  color: #40434A;
+}
+
+.app-flat-accordion .mat-expansion-panel-header .mat-icon {
+  color: #40434A;
+  font-size: 25px;
+}
+
+.app-flat-accordion .mat-expansion-panel-header.mat-expanded {
+  background: rgba(111, 75, 164, 0.25);
+}
+
+::ng-deep .mat-expansion-panel-body {
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0 !important;
+}
+
+::ng-deep .mat-expansion-panel-body .app-flat-nav-item {
+  padding-left: 20px !important;
+  background: rgba(137, 181, 130, 0.25);
+}
+
+::ng-deep .sidenav a.mat-list-item.router-link-active {
+  background: rgba(111, 75, 164, 0.25);
+}
+
+::ng-deep .sidenav a.mat-list-item:hover {
+  background: rgba(111, 75, 164, 0.1);
+}
