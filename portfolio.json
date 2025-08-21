@@ -1,0 +1,6 @@
+{
+  "title": "HabbitFlow",
+  "description": "HabbitFlow é uma aplicação fullstack para gerenciar hábitos e rotina.",
+  "gif": "https://raw.githubusercontent.com/LeoRodrigues133/HabbitFlow/refs/heads/master/Client/public/logo.png",
+  "lastCommit": "Ainda está um pouco abstrata a ideia do layout... Implementado base de serviços auth;"
+}
