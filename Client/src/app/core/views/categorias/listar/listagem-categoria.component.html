@@ -1,14 +1,24 @@
-        <mat-grid-tile-header class="justify-content-between">
-          Categorias
-          <button mat-mini-fab class="app-custom-button-color mat-elevation-z0 ">
-            <mat-icon>add</mat-icon>
-          </button>
-        </mat-grid-tile-header>
+<mat-grid-tile-header class="justify-content-between">
+  Categorias
+  <a
+    mat-mini-fab
+    class="app-custom-button-color mat-elevation-z0"
+    [routerLink]="['../categorias']"
+    >
+    <mat-icon>add</mat-icon>
+  </a>
+</mat-grid-tile-header>
 
-        <mat-nav-list class="mt-5">
-          @for (link of Categorias; track link) {
-          <a mat-list-item href="...">
-            <mat-icon matListItemIcon>drag_handle</mat-icon>
-            {{ link }}</a>
-          }
-        </mat-nav-list>
+<ng-container *ngIf="Categorias.length > 0; else empty">
+  <h6>Última Categoria Cadastrada</h6>
+  <a mat-list-item>
+    <mat-icon matListItemIcon>label</mat-icon>
+    {{ Categorias[Categorias.length - 1].titulo }}
+  </a>
+</ng-container>
+
+<ng-template #empty>
+  <div class="empty-list flex flex-col items-center text-gray-500 mt-3 text-muted">
+    <span>Nenhuma categoria cadastrada</span>
+  </div>
+</ng-template>

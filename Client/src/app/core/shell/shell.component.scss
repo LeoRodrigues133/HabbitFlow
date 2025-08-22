@@ -1,20 +1,19 @@
-.sidenav-container { height: 100%; }
-
 .sidenav {
   background: rgba(111, 75, 164, 0.25);
   width: 200px;
   border-radius: 0;
 }
 
+.mat-mdc-nav-list{
+  height: 90%;
+}
 .sidenav .mat-toolbar {
   background-color: rgba(137, 181, 130, 0.75);
 }
 
+
 .mat-toolbar.mat-primary {
-  background: #c5bddb;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  background: transparent;
 }
 
 .app-flat-nav-item {
@@ -22,7 +21,6 @@
   border-radius: 0 !important;
   display: flex;
   align-items: center;
-  gap: 8px;
 }
 
 .app-flat-accordion .mat-expansion-panel {
@@ -52,7 +50,7 @@
 }
 
 ::ng-deep .mat-expansion-panel-body .app-flat-nav-item {
-  padding-left: 20px !important;
+  padding-left: 10px !important;
   background: rgba(137, 181, 130, 0.25);
 }
 
@@ -62,4 +60,8 @@
 
 ::ng-deep .sidenav a.mat-list-item:hover {
   background: rgba(111, 75, 164, 0.1);
+}
+
+::ng-deep .mat-drawer-content{
+  height: 100vh !important;
 }

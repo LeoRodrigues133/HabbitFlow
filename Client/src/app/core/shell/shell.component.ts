@@ -12,7 +12,8 @@ import { acordionNavegacao, itemAcordionNavegacao, LinkNavegacao } from './model
 import { UsuarioTokenViewModel } from '../auth/models/auth.models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CategoriaService } from '../views/categorias/categoria.service';
+import { CategoriaService } from '../views/categorias/services/categoria.service';
+import { ListarCategoriaViewModel } from '../views/categorias/models/categoria.models';
 
 @Component({
   selector: 'app-shell',
@@ -79,8 +80,9 @@ export class ShellComponent implements OnInit {
       items: this.acordionLinks
     }
   ];
-  
-  Categorias?: string[];
+
+  Categorias?: ListarCategoriaViewModel[];
+drawer: any;
 
   ngOnInit() {
     this.categoriaService.categorias$.subscribe(categorias => {
