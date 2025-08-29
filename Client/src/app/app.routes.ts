@@ -50,7 +50,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'registro',
+    path: 'registrar',
     loadComponent: () =>
       import('./core/auth/views/registrar/registrar.component').then(
         (c) => c.RegistrarComponent
@@ -66,10 +66,10 @@ export const routes: Routes = [
     canMatch: [authUserGuard],
   },
   {
-    path: 'categorias',
-    loadComponent: () =>
-      import('./core/views/categorias/cadastrar/cadastrar-categoria.component').then(
-        (m) => m.CadastrarCategoriaComponent
+    path: 'categoria',
+    loadChildren: () =>
+      import('./core/views/categorias/categorias.routes').then(
+        (m) => m.categoriasRoutes
       ),
     canMatch: [authGuard]
   },

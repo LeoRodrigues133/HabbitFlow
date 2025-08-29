@@ -1,9 +1,9 @@
 <main class="container my-5">
   <div class="row justify-content-center g-3 mt-2">
     <div class="col col-md-10 col-lg-6">
-      <h1 class="display-3">Cadastro de categoria</h1>
+      <h1 class="display-3">Edição de categoria</h1>
       <hr />
-      <form [formGroup]="form" (submit)="cadastrar()">
+      <form [formGroup]="form" (submit)="editar()">
 
         <mat-form-field class="w-100 mt-5" appearance="fill">
           <mat-label>Título da categoria</mat-label>
@@ -18,10 +18,10 @@
         <div class="row justify-content-end g-2 gap-2 mt-5">
           <button type="submit" mat-flat-button class="col-sm-4 app-custom-button-color">
             <mat-icon matIconPrefix>add</mat-icon>
-            Cadastrar
+            Confirmar
           </button>
-          <a mat-button type="button" class="col-sm-4 app-custom-button-color-50" routerLink="/dashboard">
-            <mat-icon matIconPrefix>arrow-left</mat-icon>
+          <a mat-button type="button" class="col-sm-4 app-custom-button-color-50" routerLink="/dashboad">
+            <mat-icon matListItemIcon>arrow_back</mat-icon>
             Voltar
           </a>
         </div>

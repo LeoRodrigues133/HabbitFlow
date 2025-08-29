@@ -1,51 +1,57 @@
-import { NgForOf } from '@angular/common';
-import { Component, OnInit,  } from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { ListagemTarefasComponent } from "../tarefas/listar/listagem-tarefas.component";
-import { ListagemCategoriaComponent } from "../categorias/listar/listagem-categoria.component";
-import { ListagemCompromissosComponent } from "../compromissos/listar/listagem-compromissos.component";
+import { MatIconModule } from '@angular/material/icon';
+import { ListarCategoriaViewModel } from '../categorias/models/categoria.models';
+import { CategoriaService } from '../categorias/services/categoria.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
-    NgForOf,
     MatListModule,
     MatListModule,
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
     MatDatepickerModule,
-    ListagemCategoriaComponent,
-    ListagemTarefasComponent,
-    ListagemCompromissosComponent
+    MatIconModule,
+    RouterLink
   ],
 
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit{
-  ngOnInit(): void {
+export class DashboardComponent implements OnInit {
+
+  constructor(private categoriaService: CategoriaService) {
+
   }
+  ngOnInit(): void {
+    this.categoriaService.selecionarTodos().subscribe(categorias => {
 
-  Resumos: any[] = [
-    {
-      titulo: "Tarefas",
-      quantidade: "58"
-    }, {
-      titulo: "Concluídas",
-      quantidade: "20"
-    }, {
-      titulo: "Pendente",
-      quantidade: "2"
-    }, {
-      titulo: "Categorias",
-      quantidade: "4"
-    },
-  ]
+      this.categorias = categorias;
+      this.categoriaService.atualizarCategorias(categorias)
 
-  selectedDate: Date = new Date();
+      console.log(`Dashboard: ${this.categorias.map(x => x.titulo)}`)
+    })
+
+    // this.compromissoService.selecionarTodos().subscribe((compromissos: any) => {
+    //   this.compromissos = compromissos
+    // });
+
+    // this.contatoService.selecionarTodo().subscribe((contatos:any) =>{
+    //   this.contatos = contatos;
+    // });
+
+  }
+  categorias: ListarCategoriaViewModel[] = [];
+  compromissos: any[] = [1, 2, 3, 4, 5]; // ListarCompromissoViewModel
+  contatos: any[] = [1, 2, 3]; //ListarContatoViewModel
+
+
+  //O layout antigo estava me incomodando
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -22,24 +22,20 @@ import { ListarCategoriaViewModel } from '../models/categoria.models';
     MatButtonModule,
     MatGridListModule,
     MatDatepickerModule,
-],
+  ],
   templateUrl: './listagem-categoria.component.html',
   styleUrl: './listagem-categoria.component.scss'
 })
 export class ListagemCategoriaComponent implements OnInit {
 
-  @Output() categorias = new EventEmitter<string[]>();
 
-  Categorias:ListarCategoriaViewModel[] = [];
+  Categorias: ListarCategoriaViewModel[] = [];
 
   constructor(private route: ActivatedRoute, private categoriaService: CategoriaService
   ) { }
 
   ngOnInit() {
-    this.categoriaService.selecionarTodos().subscribe((categorias) => {
-      this.Categorias = categorias;
-      this.categoriaService.atualizarCategorias(this.Categorias);
-    });
+    this.Categorias;
   }
 }
 

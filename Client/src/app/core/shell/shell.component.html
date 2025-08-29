@@ -1,13 +1,14 @@
-<mat-sidenav-container class="sidenav-container bg-body-secondary" >
-  <mat-sidenav  #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false" *ngIf="usuarioAutenticado">
+<mat-sidenav-container class="sidenav-container bg-body-secondary">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false"
+    *ngIf="usuarioAutenticado">
     <mat-toolbar>
       <img src="/logo.png" style="width: 60px; height: 60px;">
       {{ title }}
     </mat-toolbar>
 
 
-    <mat-nav-list class="d-flex flex-column justify-content-between" >
+    <mat-nav-list class="d-flex flex-column justify-content-between">
 
       <!-- Links públicos -->
       <ng-container *ngIf="!usuarioAutenticado">
@@ -38,8 +39,11 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <a *ngFor="let item of Categorias" mat-list-item class="app-flat-nav-item">
-              <mat-icon matListItemIcon>drag_handle</mat-icon>
+            <a *ngFor="let item of Categorias" mat-list-item class="app-flat-nav-item"
+            (click)="abrirModal(item)"
+            >
+            <!-- [routerLink]="['/categoria','editar',item.id]"> -->
+            <mat-icon matListItemIcon>drag_handle</mat-icon>
               {{ item.titulo }}
             </a>
           </mat-expansion-panel>

@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -35,7 +35,8 @@ export class CadastrarCategoriaComponent {
   }
 
   constructor(private formBuilder: FormBuilder,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
+    private route: Router
   ) {
     this.form = this.formBuilder.group(
       { titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]] }
@@ -51,6 +52,8 @@ export class CadastrarCategoriaComponent {
       next: (registro) => this.processarSucesso(registro),
       error: (erro) => this.processarFalha(erro)
     });
+
+    this.route.navigate(['/dashboard'])
   }
 
   private processarSucesso(registro: CadastrarCategoriaViewModel): void {

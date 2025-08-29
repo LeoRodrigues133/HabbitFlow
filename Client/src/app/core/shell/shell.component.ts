@@ -14,6 +14,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CategoriaService } from '../views/categorias/services/categoria.service';
 import { ListarCategoriaViewModel } from '../views/categorias/models/categoria.models';
+import { DetalhesCategoriasComponent } from '../views/categorias/modal/detalhes-categorias.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-shell',
@@ -37,6 +39,8 @@ export class ShellComponent implements OnInit {
   title = 'HabbitFlow';
   @Input() usuarioAutenticado?: UsuarioTokenViewModel;
   @Output() logout: EventEmitter<void>;
+
+
   Links: LinkNavegacao[] = [
     {
       titulo: 'Login',
@@ -82,22 +86,44 @@ export class ShellComponent implements OnInit {
   ];
 
   Categorias?: ListarCategoriaViewModel[];
-drawer: any;
+  drawer: any;
 
   ngOnInit() {
     this.categoriaService.categorias$.subscribe(categorias => {
       this.Categorias = categorias;
+
+      console.log(`Shell: ${this.Categorias.map(x => x.titulo)}`)
     });
+
+    if (!this.Categorias?.length) {
+      this.categoriaService.selecionarTodos().subscribe(categorias => {
+        this.Categorias = categorias;
+      })
+    }
+
   }
 
 
-  constructor(private categoriaService: CategoriaService) {
+  constructor(private categoriaService: CategoriaService,
+    private dialog: MatDialog
+  ) {
     this.logout = new EventEmitter();
   }
 
 
   logoutEfetuado() {
     this.logout.emit();
+  }
+
+  // Modificar isso aqui depois
+  abrirModal(categoria: any) {
+    const dialogRef = this.dialog.open(DetalhesCategoriasComponent, {
+      width: '100%',
+      height: '100%',
+      maxWidth: '80vw',
+      maxHeight: '70vh',
+      data: categoria
+    });
   }
 
   private breakpointObserver = inject(BreakpointObserver);

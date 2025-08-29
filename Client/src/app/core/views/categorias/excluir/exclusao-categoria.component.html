@@ -1,0 +1,35 @@
+<main class="container my-5">
+  <div class="row justify-content-center g-3 mt-2">
+    <div class="col col-md-10 col-lg-6">
+      <h1 class="display-3">Exclusão de Categoria</h1>
+
+      <hr />
+
+      <mat-card class="card-listagem mat-elevation-z1">
+        <mat-card-content class="d-grid">
+          <mat-card-title>{{ Categoria?.titulo }}</mat-card-title>
+        </mat-card-content>
+      </mat-card>
+
+      <p class="mt-4">
+        Deseja realmente excluir o registro? <strong>Atenção:</strong> Não será
+        possível recuperar estes dados posteriormente.
+      </p>
+
+      <div class="row justify-content-end g-2 gap-2 mt-5">
+        <button
+        type="button"
+        mat-flat-button
+        class="col-sm-4 app-custom-button-color"
+        (click)="excluir()">
+          <mat-icon matListItemIcon>delete</mat-icon>
+          Confirmar
+        </button>
+        <a mat-button type="button" class="col-sm-4 app-custom-button-color-50" routerLink="/dashboard">
+          <mat-icon matListItemIcon>arrow_back</mat-icon>
+          Voltar
+        </a>
+      </div>
+    </div>
+  </div>
+</main>

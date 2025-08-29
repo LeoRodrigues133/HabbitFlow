@@ -1,52 +1,48 @@
-<main class="container ps-5 ">
-  <div class="row row-cols-1 p-3">
+<main class="container py-4">
+  <mat-card class="mat-elevation-z4 p-4">
 
-    <mat-grid-list cols="5" gutterSize="20px">
+    <mat-card-title class="mb-4">Resumo Geral</mat-card-title>
 
-      <mat-grid-tile rowspan="1" colspan="2" class="rounded-2 mat-elevation-z3">
+    <div class="d-flex justify-content-between gap-4">
 
-        <mat-grid-tile-header class="justify-content-between">
-          Resumo
-        </mat-grid-tile-header>
+      <!-- Categorias -->
+      <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
+        <mat-card-header class="justify-content-between">
+          <mat-card-title>Categorias</mat-card-title>
+          <a
+          mat-mini-fab aria-label="Adicionar categoria"
+          class="app-custom-button-color mat-elevation-z0"
+          [routerLink]="['/categoria']"
+          >
+            <mat-icon>add</mat-icon>
+          </a>
+        </mat-card-header>
+        <h2>{{ categorias.length || 0 }}</h2>
+      </mat-card>
 
-        <div class="d-flex gap-4 mt-4 text-center">
-          <div *ngFor="let resumo of Resumos">
-            <h2 class="mb-1">{{ resumo.quantidade }}</h2>
-            <small>{{resumo.titulo}}</small>
-          </div>
-        </div>
+      <!-- Compromissos -->
+      <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
+        <mat-card-header class="justify-content-between">
+          <mat-card-title>Compromissos</mat-card-title>
+          <button mat-mini-fab aria-label="Adicionar compromisso" class="app-custom-button-color mat-elevation-z0">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-header>
+        <h2>{{ compromissos.length || 0 }}</h2>
+      </mat-card>
 
-      </mat-grid-tile>
+      <!-- Contatos -->
+      <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
+        <mat-card-header class="justify-content-between">
+          <mat-card-title>Contatos</mat-card-title>
+          <button mat-mini-fab aria-label="Adicionar contato" class="app-custom-button-color mat-elevation-z0">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-header>
+        <h2>{{ contatos.length || 0 }}</h2>
+      </mat-card>
 
-      <mat-grid-tile rowspan="2" colspan="2" class="rounded-3 mat-elevation-z3">
+    </div>
 
-        <mat-grid-tile-header>
-          Calendário
-        </mat-grid-tile-header>
-        <mat-card class="calendar-card">
-          <mat-calendar [selected]="selectedDate"></mat-calendar>
-        </mat-card>
-
-      </mat-grid-tile>
-
-      <mat-grid-tile rowspan="1" colspan="2" class="rounded-3 mat-elevation-z3">
-        <app-listagem-compromissos></app-listagem-compromissos>
-      </mat-grid-tile>
-
-
-      <mat-grid-tile rowspan="1" colspan="2" class="rounded-3 mat-elevation-z3">
-        <app-listagem-tarefas></app-listagem-tarefas>
-      </mat-grid-tile>
-
-      <mat-grid-tile rowspan="1" colspan="2" class="rounded-3 mat-elevation-z3">
-        <app-listagem-categoria></app-listagem-categoria>
-      </mat-grid-tile>
-
-    </mat-grid-list>
-
-  </div>
+  </mat-card>
 </main>
-
-
-<!-- Acho que o layout é esse... -->
-<!-- Os comentários são para eu não esquecer oque tava pensando quando criei -->
