@@ -1,4 +1,5 @@
 using HabbitFlow.Dominio.Compartilhado;
+using HabbitFlow.Dominio.ModuloCategoria;
 using HabbitFlow.Dominio.ModuloSubtarefa;
 
 namespace HabbitFlow.Dominio.ModuloTarefa;
@@ -11,12 +12,17 @@ public class Tarefa : EntidadeBase<Tarefa>
         Subtarefas = new List<SubTarefa>();
     }
 
-    public Tarefa(string titulo) : this()
+    public Tarefa(string titulo, Categoria? categoria) : this()
     {
         Titulo = titulo;
+        Categoria = categoria;
     }
 
     public string Titulo { get; set; }
+
+    public Categoria? Categoria { get; set; }
+    public Guid CategoriaId {  get; set; }
+
     public List<SubTarefa> Subtarefas { get; set; }
 
     public void CadastrarSubTarefa(string titulo) =>

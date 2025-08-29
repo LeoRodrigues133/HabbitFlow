@@ -10,15 +10,26 @@ public class MapeadorTarefa : IEntityTypeConfiguration<Tarefa>
     {
         builder.ToTable("TBTAREFAS");
 
-        builder.Property(x => x.Id)
+        builder
+            .Property(x => x.Id)
             .IsRequired()
             .ValueGeneratedNever();
 
-        builder.Property(x => x.Titulo)
+        builder
+            .Property(x => x.Titulo)
             .HasColumnType("varchar(100)")
             .IsRequired();
 
-        builder.HasMany(x => x.Subtarefas)
+        builder
+            .HasOne(x => x.Categoria)
+            .WithMany(x => x.Tarefas)
+            .HasForeignKey(x => x.CategoriaId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
+        builder
+            .HasMany(x => x.Subtarefas)
             .WithOne(x => x.Tarefa)
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Cascade);

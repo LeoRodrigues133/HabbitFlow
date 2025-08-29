@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace HabbitFlow.Infra.Migrations
+namespace HabbitFlow.Infra.orm.Migrations
 {
     /// <inheritdoc />
-    public partial class fullmigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -204,6 +204,7 @@ namespace HabbitFlow.Infra.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Titulo = table.Column<string>(type: "varchar(100)", nullable: false),
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -213,6 +214,12 @@ namespace HabbitFlow.Infra.Migrations
                         name: "FK_TBTAREFAS_AspNetUsers_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TBTAREFAS_TBCATEGORIA_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "TBCATEGORIA",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -344,6 +351,11 @@ namespace HabbitFlow.Infra.Migrations
                 column: "TarefaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TBTAREFAS_CategoriaId",
+                table: "TBTAREFAS",
+                column: "CategoriaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TBTAREFAS_UsuarioId",
                 table: "TBTAREFAS",
                 column: "UsuarioId");
@@ -377,13 +389,13 @@ namespace HabbitFlow.Infra.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "TBCATEGORIA");
-
-            migrationBuilder.DropTable(
                 name: "TBContato");
 
             migrationBuilder.DropTable(
                 name: "TBTAREFAS");
+
+            migrationBuilder.DropTable(
+                name: "TBCATEGORIA");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

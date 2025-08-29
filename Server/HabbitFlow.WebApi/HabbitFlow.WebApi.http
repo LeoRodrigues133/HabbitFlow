@@ -1,4 +1,4 @@
-@HabbitFlow.WebApi_Host = https://localhost:7777
+@HabbitFlow.WebApi_Host = https://localhost:4201
 
 GET {{HabbitFlow.WebApi_Host}}/categoria/
 Accept: application/json

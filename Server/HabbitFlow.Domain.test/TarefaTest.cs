@@ -10,7 +10,7 @@ namespace HabbitFlow.Dominio.Tests.ModuloTarefa
         public void Deve_cadastrar_subtarefa()
         {
             // arrange
-            var tarefa = new Tarefa("Tarefa teste");
+            var tarefa = new Tarefa("Tarefa teste",null);
 
             // act
             tarefa.CadastrarSubTarefa("Sub 1");
@@ -23,7 +23,7 @@ namespace HabbitFlow.Dominio.Tests.ModuloTarefa
         [TestMethod]
         public void Deve_selecionar_subtarefa_por_id()
         {
-            var tarefa = new Tarefa("Tarefa");
+            var tarefa = new Tarefa("Tarefa",null);
             tarefa.CadastrarSubTarefa("Sub 1");
             tarefa.CadastrarSubTarefa("Sub 2");
 
@@ -38,7 +38,7 @@ namespace HabbitFlow.Dominio.Tests.ModuloTarefa
         [TestMethod]
         public void Deve_remover_subtarefa()
         {
-            var tarefa = new Tarefa("Tarefa");
+            var tarefa = new Tarefa("Tarefa",null);
             tarefa.CadastrarSubTarefa("Sub 1");
 
             var subId = tarefa.Subtarefas[0].Id;
@@ -51,7 +51,7 @@ namespace HabbitFlow.Dominio.Tests.ModuloTarefa
         [TestMethod]
         public void Deve_concluir_subtarefa()
         {
-            var tarefa = new Tarefa("Tarefa");
+            var tarefa = new Tarefa("Tarefa", null);
             tarefa.CadastrarSubTarefa("Sub 1");
 
             var sub = tarefa.Subtarefas[0];
@@ -64,7 +64,7 @@ namespace HabbitFlow.Dominio.Tests.ModuloTarefa
         [TestMethod]
         public void Deve_reabrir_subtarefa()
         {
-            var tarefa = new Tarefa("Tarefa");
+            var tarefa = new Tarefa("Tarefa", null);
             tarefa.CadastrarSubTarefa("Sub 1");
 
             var sub = tarefa.Subtarefas[0];
@@ -79,7 +79,7 @@ namespace HabbitFlow.Dominio.Tests.ModuloTarefa
         public void ToString_deve_retornar_titulo_da_tarefa()
         {
             // arrange
-            var tarefa = new Tarefa("Minha tarefa");
+            var tarefa = new Tarefa("Minha tarefa", null);
 
             // act
             var desc = tarefa.ToString();

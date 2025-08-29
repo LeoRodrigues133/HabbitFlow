@@ -13,12 +13,17 @@ public class RepositorioTarefa : RepositorioBase<Tarefa>, IRepositorioTarefa
 
     public override async Task<Tarefa >SelecionarPorIdAsync(Guid id)
     {
-        return  _registros.Include(x => x.Subtarefas).SingleOrDefault(x=>x.Id == id);
+        return  _registros
+            .Include(x=> x.Categoria)
+            .Include(x => x.Subtarefas)
+            .SingleOrDefault(x=>x.Id == id);
     }
 
     public override async  Task<List<Tarefa>> SelecionarTodosAsync()
     {
-        return _registros.Include(x =>x.Subtarefas).ToList();
+        return _registros
+            .Include(x=> x.Categoria)
+            .Include(x =>x.Subtarefas).ToList();
     }
 
     public Task<List<Tarefa>> Filtrar(Func<Tarefa, bool> predicate)

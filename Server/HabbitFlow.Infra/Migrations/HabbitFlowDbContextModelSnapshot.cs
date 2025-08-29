@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace HabbitFlow.Infra.Migrations
+namespace HabbitFlow.Infra.orm.Migrations
 {
     [DbContext(typeof(HabbitFlowDbContext))]
     partial class HabbitFlowDbContextModelSnapshot : ModelSnapshot
@@ -224,6 +224,9 @@ namespace HabbitFlow.Infra.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
@@ -232,6 +235,8 @@ namespace HabbitFlow.Infra.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -428,11 +433,18 @@ namespace HabbitFlow.Infra.Migrations
 
             modelBuilder.Entity("HabbitFlow.Dominio.ModuloTarefa.Tarefa", b =>
                 {
+                    b.HasOne("HabbitFlow.Dominio.ModuloCategoria.Categoria", "Categoria")
+                        .WithMany("Tarefas")
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("HabbitFlow.Dominio.ModuloAuth.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Categoria");
 
                     b.Navigation("Usuario");
                 });
@@ -491,6 +503,8 @@ namespace HabbitFlow.Infra.Migrations
             modelBuilder.Entity("HabbitFlow.Dominio.ModuloCategoria.Categoria", b =>
                 {
                     b.Navigation("Compromissos");
+
+                    b.Navigation("Tarefas");
                 });
 
             modelBuilder.Entity("HabbitFlow.Dominio.ModuloContato.Contato", b =>

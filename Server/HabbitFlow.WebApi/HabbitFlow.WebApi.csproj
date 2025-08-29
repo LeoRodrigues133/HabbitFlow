@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HabbitFlow.Aplicacao\HabbitFlow.Aplicacao.csproj" />
     <ProjectReference Include="..\HabbitFlow.Dominio\HabbitFlow.Dominio.csproj" />
-    <ProjectReference Include="..\HabbitFlow.Infra\HabbitFlow.Infra.csproj" />
+    <ProjectReference Include="..\HabbitFlow.Infra\HabbitFlow.Infra.orm.csproj" />
   </ItemGroup>
 
 </Project>

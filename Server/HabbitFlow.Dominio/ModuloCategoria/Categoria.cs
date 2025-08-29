@@ -8,10 +8,13 @@ public class Categoria : EntidadeBase<Categoria>
 {
     public string Titulo { get; set; }
     public List<Compromisso> Compromissos { get; set; }
+    public List<Tarefa> Tarefas { get; set; }
 
     public Categoria()
     {
         Compromissos = new List<Compromisso>();
+
+        Tarefas = new List<Tarefa>();
     }
 
     public Categoria(string titulo)

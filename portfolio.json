@@ -2,5 +2,5 @@
   "title": "HabbitFlow",
   "description": "HabbitFlow é uma aplicação fullstack para gerenciar hábitos e rotina.",
   "gif": "https://raw.githubusercontent.com/LeoRodrigues133/HabbitFlow/refs/heads/master/Client/public/Prototipo2.png",
-  "lastCommit": "Atualizado pontos do layout; Inicializado todos os módulos para apresentação no dashboard; Adicionado configuração de guard e rotas;Adicionado configuração para token;"
+  "lastCommit": "finalizado módulo de categorias, otimizado services, e behaviorSubjects. Corrigido pequeno erro no server, alterado nomes de alguns arquivos."
 }

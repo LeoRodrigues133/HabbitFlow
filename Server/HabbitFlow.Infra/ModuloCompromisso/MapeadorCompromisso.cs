@@ -12,6 +12,7 @@ public class MapeadorCompromisso : IEntityTypeConfiguration<Compromisso>
 
         builder
             .Property(x => x.Id)
+            .IsRequired()
             .ValueGeneratedNever();
 
         builder

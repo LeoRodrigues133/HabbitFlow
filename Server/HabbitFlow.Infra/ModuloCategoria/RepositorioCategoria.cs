@@ -12,11 +12,17 @@ public class RepositorioCategoria : RepositorioBase<Categoria>, IRepositorioCate
 
     public override async Task<Categoria> SelecionarPorIdAsync(Guid id)
     {
-        return _registros.Include(x => x.Compromissos).SingleOrDefault(x => x.Id == id)!;
+        return _registros
+        .Include(x => x.Tarefas)
+        .Include(x => x.Compromissos)
+        .SingleOrDefault(x => x.Id == id)!;
     }
 
     public override async Task<List<Categoria>> SelecionarTodosAsync()
     {
-        return _registros.Include(x => x.Compromissos).ToList();
+        return _registros
+        .Include(x => x.Tarefas)
+        .Include(x => x.Compromissos)
+        .ToList();
     }
 }

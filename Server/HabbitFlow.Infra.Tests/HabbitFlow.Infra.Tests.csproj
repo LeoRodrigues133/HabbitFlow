@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HabbitFlow.Infra\HabbitFlow.Infra.csproj" />
+    <ProjectReference Include="..\HabbitFlow.Infra\HabbitFlow.Infra.orm.csproj" />
   </ItemGroup>
 
   <ItemGroup>

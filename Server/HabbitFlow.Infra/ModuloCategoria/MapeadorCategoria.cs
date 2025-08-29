@@ -12,6 +12,7 @@ public class MapeadorCategoria : IEntityTypeConfiguration<Categoria>
 
         builder
             .Property(x => x.Id)
+            .IsRequired()
             .ValueGeneratedNever();
 
         builder
@@ -25,10 +26,18 @@ public class MapeadorCategoria : IEntityTypeConfiguration<Categoria>
             .HasForeignKey(x=>x.CategoriaId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        builder.HasOne(x => x.Usuario)
-           .WithMany()
-           .IsRequired()
-           .HasForeignKey(x => x.UsuarioId)
-           .OnDelete(DeleteBehavior.NoAction);
+        builder
+            .HasMany(x => x.Tarefas)
+            .WithOne()
+            .IsRequired()
+            .HasForeignKey(x => x.CategoriaId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder
+            .HasOne(x => x.Usuario)
+            .WithMany()
+            .IsRequired()
+            .HasForeignKey(x => x.UsuarioId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Infra", "5. Infra", "{55
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Dominio", "HabbitFlow.Dominio\HabbitFlow.Dominio.csproj", "{D3EB42C6-5EE1-4194-B6F5-06396A154F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Infra", "HabbitFlow.Infra\HabbitFlow.Infra.csproj", "{8963B996-3EC2-48A0-ADC3-681FE2B68CB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Infra.orm", "HabbitFlow.Infra\HabbitFlow.Infra.orm.csproj", "{8963B996-3EC2-48A0-ADC3-681FE2B68CB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabbitFlow.Aplicacao", "HabbitFlow.Aplicacao\HabbitFlow.Aplicacao.csproj", "{8D0DC7D5-2F01-4B92-B634-91DF5D3CB2EE}"
 EndProject
