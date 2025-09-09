@@ -30,6 +30,7 @@ public class MapeadorCompromisso : IEntityTypeConfiguration<Compromisso>
 
         builder
             .Property(x => x.Hora)
+            .HasColumnType("time")
             .IsRequired(false);
 
         builder

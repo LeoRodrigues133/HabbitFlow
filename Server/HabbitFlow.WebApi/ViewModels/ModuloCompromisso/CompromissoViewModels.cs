@@ -7,10 +7,10 @@ public abstract class CompromissoViewModels
     {
         public Guid Id { get; set; }
         public string Titulo { get; set; }
-        public string Conteudo { get; set; }
+        public string? Conteudo { get; set; }
         public string Local { get; set; }
         public DateTime Data { get; set; }
-        public DateTime? Hora { get; set; }
+        public TimeSpan? Hora { get; set; }
         public Guid? ContatoId { get; set; }
         public Guid? CategoriaId { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
@@ -19,22 +19,22 @@ public abstract class CompromissoViewModels
     public class CadastrarCompromissoViewModel
     {
         public string Titulo { get; set; }
-        public string Conteudo { get; set; }
+        public string? Conteudo { get; set; }
         public string Local { get; set; }
         public DateTime Data { get; set; }
-        public DateTime? Hora { get; set; }
+        public TimeSpan? Hora { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
         public Guid? ContatoId { get; set; }
-        public Guid? CategoriId { get; set; }
+        public Guid? CategoriaId { get; set; }
     }
 
     public class EditarCompromissoViewModel
     {
         public string Titulo { get; set; }
-        public string Conteudo { get; set; }
+        public string? Conteudo { get; set; }
         public string Local { get; set; }
         public DateTime Data { get; set; }
-        public DateTime? Hora { get; set; }
+        public TimeSpan? Hora { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
         public Guid? ContatoId { get; set; }
         public Guid? CategoriaId { get; set; }
@@ -44,10 +44,10 @@ public abstract class CompromissoViewModels
     {
         public Guid Id { get; set; }
         public string Titulo { get; set; }
-        public string Conteudo { get; set; }
+        public string? Conteudo { get; set; }
         public string Local { get; set; }
         public DateTime Data { get; set; }
-        public DateTime? Hora { get; set; }
+        public TimeSpan? Hora { get; set; }
         public TipoCompromissoEnum Tipo { get; set; }
         public Guid? ContatoId { get; set; }
         public Guid? CategoriaId { get; set; }

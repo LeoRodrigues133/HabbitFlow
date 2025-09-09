@@ -16,7 +16,7 @@ public class Compromisso : EntidadeBase<Compromisso>
         string local,
         string titulo,
         DateTime data,
-        DateTime? hora,
+        TimeSpan? hora,
         string conteudo,
         Contato? contato,
         Categoria? categoria,
@@ -41,7 +41,7 @@ public class Compromisso : EntidadeBase<Compromisso>
     public string Link { get; set; }
     public string Titulo { get; set; }
     public string Conteudo { get; set; }
-    public DateTime? Hora { get; set; }
+    public TimeSpan? Hora { get; set; }
 
     TipoCompromissoEnum _tipoEnum;
     public TipoCompromissoEnum TipoEnum
