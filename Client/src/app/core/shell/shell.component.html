@@ -13,7 +13,7 @@
       <!-- Links públicos -->
       <ng-container *ngIf="!usuarioAutenticado">
 
-        <a *ngFor="let link of Links" mat-list-item [routerLink]="link.rota">
+        <a *ngFor="let link of Links" mat-list-item [routerLink]="link.rota" matTooltip="Ir para {{ link.titulo }}">
           <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
           {{ link.titulo }}
         </a>
@@ -24,14 +24,16 @@
 
       <ng-container *ngIf="usuarioAutenticado" class="h-100">
 
-        <a *ngFor="let link of LinksAuteticados" mat-list-item [routerLink]="link.rota" class="app-flat-nav-item ">
+        <a *ngFor="let link of LinksAuteticados" mat-list-item [routerLink]="link.rota" class="app-flat-nav-item "
+          matTooltip="Ir para {{ link.titulo }}">
           <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
           {{ link.titulo }}
         </a>
 
 
-        <mat-accordion class="app-flat-accordion flex-grow-1">
-          <mat-expansion-panel *ngFor="let link of Acordion">
+        <mat-accordion class="app-flat-accordion flex-grow-1"
+        >
+          <mat-expansion-panel *ngFor="let link of Acordion" matTooltip="Abrir categorias">
             <mat-expansion-panel-header>
               <mat-panel-title class="gap-4" mat-list-item>
                 <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
@@ -39,11 +41,10 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <a *ngFor="let item of Categorias" mat-list-item class="app-flat-nav-item"
-            (click)="abrirModal(item)"
-            >
-            <!-- [routerLink]="['/categoria','editar',item.id]"> -->
-            <mat-icon matListItemIcon>drag_handle</mat-icon>
+            <a *ngFor="let item of Categorias" mat-list-item class="app-flat-nav-item" (click)="abrirModal(item)"
+              matTooltip="Visualizar {{ item.titulo }}">
+              <!-- [routerLink]="['/categoria','editar',item.id]"> -->
+              <mat-icon matListItemIcon>drag_handle</mat-icon>
               {{ item.titulo }}
             </a>
           </mat-expansion-panel>

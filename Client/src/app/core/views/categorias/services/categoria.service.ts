@@ -7,7 +7,7 @@ import { CadastrarCategoriaViewModel, EditarCategoriaViewModel, ExcluirCategoria
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaService{
+export class CategoriaService {
   private readonly API_URL = `${environment.API_URL}/categoria`;
 
   private categoriasSource = new BehaviorSubject<ListarCategoriaViewModel[]>([]);
@@ -50,7 +50,7 @@ export class CategoriaService{
   }
 
   atualizarCategorias(categorias: ListarCategoriaViewModel[]) {
-    console.log(`Service: ${categorias.map(x=>x.titulo)}`)
+    console.log(`Service: ${categorias.map(x => x.titulo)}`)
 
     this.categoriasSource.next(categorias);
   }

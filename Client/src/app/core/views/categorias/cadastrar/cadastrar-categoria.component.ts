@@ -39,7 +39,15 @@ export class CadastrarCategoriaComponent {
     private route: Router
   ) {
     this.form = this.formBuilder.group(
-      { titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]] }
+      {
+        titulo: ['',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(40)
+          ]
+        ]
+      }
     )
   }
 

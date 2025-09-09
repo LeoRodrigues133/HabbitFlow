@@ -8,10 +8,4 @@ export interface acordionNavegacao{
   titulo:string;
   icone:string;
 
-  items:itemAcordionNavegacao[];
-}
-
-export interface itemAcordionNavegacao{
-  titulo:string;
-  rota:string;
 }

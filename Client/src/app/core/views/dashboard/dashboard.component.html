@@ -10,10 +10,10 @@
         <mat-card-header class="justify-content-between">
           <mat-card-title>Categorias</mat-card-title>
           <a
-          mat-mini-fab aria-label="Adicionar categoria"
+          mat-mini-fab
+          matTooltip="Adicionar categoria"
           class="app-custom-button-color mat-elevation-z0"
-          [routerLink]="['/categoria']"
-          >
+            [routerLink]="['/categoria', 'cadastrar']">
             <mat-icon>add</mat-icon>
           </a>
         </mat-card-header>
@@ -24,9 +24,13 @@
       <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
         <mat-card-header class="justify-content-between">
           <mat-card-title>Compromissos</mat-card-title>
-          <button mat-mini-fab aria-label="Adicionar compromisso" class="app-custom-button-color mat-elevation-z0">
+          <a
+          mat-mini-fab
+          matTooltip="Adicionar compromisso"
+          class="app-custom-button-color mat-elevation-z0"
+          [routerLink]="['/compromisso','cadastrar']">
             <mat-icon>add</mat-icon>
-          </button>
+          </a>
         </mat-card-header>
         <h2>{{ compromissos.length || 0 }}</h2>
       </mat-card>
@@ -34,12 +38,16 @@
       <!-- Contatos -->
       <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
         <mat-card-header class="justify-content-between">
-          <mat-card-title>Contatos</mat-card-title>
-          <button mat-mini-fab aria-label="Adicionar contato" class="app-custom-button-color mat-elevation-z0">
+          <mat-card-title>Tarefas</mat-card-title>
+          <button
+          mat-mini-fab
+          matTooltip="Adicionar tarefa"
+          class="app-custom-button-color mat-elevation-z0"
+          [routerLink]="['/tarefa','cadastrar']">
             <mat-icon>add</mat-icon>
           </button>
         </mat-card-header>
-        <h2>{{ contatos.length || 0 }}</h2>
+        <h2>{{ tarefas.length || 0 }}</h2>
       </mat-card>
 
     </div>

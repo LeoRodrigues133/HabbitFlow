@@ -1,17 +1,57 @@
+<main class="container my-4">
+  <div class="row g-3 mt-2">
+    <h1 class="fs-2 text-center">Listagem de Compromissos</h1>
 
-        <mat-grid-tile-header class="justify-content-between">
-          Compromissos
-          <button mat-mini-fab class="app-custom-button-color mat-elevation-z0 ">
-            <mat-icon>add</mat-icon>
-          </button>
-        </mat-grid-tile-header>
+    <section aria-label="Opções" class="row justify-content-end g-1 gap-2">
+      <a
+        mat-flat-button
+        class="col-lg-4 col-xxl-2 fs-6 py-4 app-custom-button-color"
+        [routerLink]="['/compromisso', 'cadastrar']"
+      >
+        <mat-icon>add_circle</mat-icon>
+        Cadastrar
+      </a>
+    </section>
 
-        <mat-nav-list class="mt-5">
-          @for (compromisso of Compromissos; track compromisso) {
-          <a mat-list-item href="#" class="justify-content-between">
-            <span>{{ compromisso.titulo }}</span>
-            <span>{{ formatarData(compromisso.data) }}</span>
+    <hr />
 
+    <div
+      *ngFor="let item of compromissos; index as i"
+      class="col-md-6 col-lg-4"
+    >
+      <mat-card
+        class="card-listagem card-animado mat-mdc-elevation-specific mat-elevation-z3 h-100"
+      >
+        <mat-card-header>
+          <mat-card-title>{{ item.titulo }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="d-grid mt-4">
+          <span><strong>Conteúdo:</strong> {{ item.conteudo }}</span>
+          <span><strong>Data:</strong> {{ item.data | date: 'dd/MM/YY'   }}</span>
+          <span><strong>Hora de início:</strong> {{ item.hora }}</span>
+        </mat-card-content>
+
+        <mat-card-footer class="d-flex justify-content-end gap-1 p-3 mt-auto">
+          <a
+            mat-mini-fab
+            class="app-custom-button-color mat-elevation-z0"
+            matTooltip="Editar {{ item.titulo }}"
+            [routerLink]="['/compromisso', 'editar', item.id]"
+          >
+            <mat-icon>edit</mat-icon>
           </a>
-          }
-        </mat-nav-list>
+
+          <a
+            mat-mini-fab
+            class="app-custom-button-color mat-elevation-z0"
+            matTooltip="Excluir {{ item.titulo }}"
+            [routerLink]="['/compromisso', 'excluir', item.id]"
+          >
+            <mat-icon>delete</mat-icon>
+          </a>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+</main>

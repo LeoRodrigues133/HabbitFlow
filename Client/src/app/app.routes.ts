@@ -69,8 +69,24 @@ export const routes: Routes = [
     path: 'categoria',
     loadChildren: () =>
       import('./core/views/categorias/categorias.routes').then(
-        (m) => m.categoriasRoutes
+        (r) => r.categoriasRoutes
       ),
     canMatch: [authGuard]
   },
+  {
+    path: 'compromisso',
+    loadChildren: () =>
+      import('./core/views/compromissos/compromisso.routes').then(
+        (r) => r.compromissosRoutes
+      ),
+    canMatch: [authGuard]
+  },
+  {
+    path: 'tarefa',
+    loadChildren: () =>
+      import('./core/views/tarefas/tarefa.routes').then(
+        (r) => r.tarefaRoutes
+      ),
+    canMatch: [authGuard]
+  }
 ];

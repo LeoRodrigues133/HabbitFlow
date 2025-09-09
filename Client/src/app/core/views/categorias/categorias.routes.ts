@@ -7,7 +7,7 @@ import { ExclusaoCategoriaComponent } from "./excluir/exclusao-categoria.compone
 
 export const categoriasRoutes: Routes = [
   {
-    path: '',
+    path: 'cadastrar',
     component: CadastrarCategoriaComponent,
   },
   {

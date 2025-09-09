@@ -1,21 +1,22 @@
 import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { map, shareReplay } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { acordionNavegacao, itemAcordionNavegacao, LinkNavegacao } from './models/Link-navegacao.model';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { UsuarioTokenViewModel } from '../auth/models/auth.models';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { acordionNavegacao, LinkNavegacao } from './models/Link-navegacao.model';
 import { CategoriaService } from '../views/categorias/services/categoria.service';
 import { ListarCategoriaViewModel } from '../views/categorias/models/categoria.models';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { DetalhesCategoriasComponent } from '../views/categorias/modal/detalhes-categorias.component';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-shell',
@@ -23,16 +24,17 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './shell.component.scss',
   standalone: true,
   imports: [
+    NgIf,
     NgForOf,
+    AsyncPipe,
     RouterLink,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
     MatListModule,
     MatIconModule,
-    AsyncPipe,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTooltipModule,
     MatExpansionModule,
-    NgIf
   ]
 })
 export class ShellComponent implements OnInit {
@@ -59,29 +61,24 @@ export class ShellComponent implements OnInit {
       titulo: 'Dashboard',
       icone: 'home',
       rota: '/dashboard',
+    },
+    {
+      titulo: 'Compromissos',
+      icone: 'booksmark',
+      rota: '/compromisso'
+    },
+    {
+      titulo: 'Tarefas',
+      icone: 'task',
+      rota: '/tarefa'
     }
   ];
 
-  acordionLinks: itemAcordionNavegacao[] = [
-    {
-      titulo: 'Compras',
-      rota: '/compras'
-    },
-    {
-      titulo: 'Estudos',
-      rota: '/estudos'
-    },
-    {
-      titulo: 'Academia',
-      rota: '/academia'
-    }
-  ];
 
   Acordion: acordionNavegacao[] = [
     {
       titulo: 'Categorias',
-      icone: 'booksmark',
-      items: this.acordionLinks
+      icone: 'booksmark'
     }
   ];
 
@@ -102,7 +99,6 @@ export class ShellComponent implements OnInit {
     }
 
   }
-
 
   constructor(private categoriaService: CategoriaService,
     private dialog: MatDialog

@@ -11,7 +11,8 @@ import { MatCardModule } from "@angular/material/card";
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-detalhes-categorias',
-  imports: [MatDialogModule,
+  imports: [
+    MatDialogModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -19,7 +20,8 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     MatListModule,
     MatCardModule,
-    RouterLink],
+    RouterLink
+  ],
   templateUrl: './detalhes-categorias.component.html',
   styleUrl: './detalhes-categorias.component.scss'
 })
