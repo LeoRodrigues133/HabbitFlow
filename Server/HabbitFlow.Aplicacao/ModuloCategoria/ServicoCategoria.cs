@@ -19,88 +19,6 @@ public class ServicoCategoria : ServicoBase<Categoria, CategoriaValidation>
         _persistContext = persistContext;
     }
 
-    public Result<Categoria> Cadastrar(Categoria categoria)
-    {
-        Log.Logger.Debug($"Tentando cadastrar categoria {categoria}");
-
-        Result result = Validar(categoria);
-
-        if (result.IsFailed)
-            return Result.Fail(result.Errors);
-
-        try
-        {
-            _repositorioCategoria.Cadastrar(categoria);
-
-            _persistContext.SaveContextChanges();
-
-            Log.Logger.Information($"Categoria {categoria} cadastrado com sucesso!");
-
-            return Result.Ok(categoria);
-        }
-        catch (Exception ex)
-        {
-            _persistContext.UndoContextChanges();
-
-            string error = "Falha ao tentar cadastrar categoria no sistema";
-
-            Log.Logger.Error(ex, error + $"{categoria}");
-
-            return Result.Fail(error);
-        }
-    }
-    public Result<Categoria> SelecionaPorId(Guid id)
-    {
-        Log.Logger.Debug($"Tentando selecionar categoria com id: [{id}]");
-
-        try
-        {
-            var categoria = _repositorioCategoria.SelecionarPorId(id);
-
-            if (categoria == null)
-            {
-                Log.Logger.Warning($"Categoria id: [{id}] não encontrada.");
-
-                return Result.Fail("Categoria não encontrado");
-            }
-
-            Log.Logger.Information($"Categoria id [{id}] selecionada com sucesso!");
-
-            return Result.Ok(categoria);
-
-        }
-        catch (Exception ex)
-        {
-            string error = "Falha ao tentar selecionar categoria no sistema.";
-
-            Log.Logger.Error(ex, error + $"{id}");
-
-            return Result.Fail(error);
-        }
-    }
-
-    public Result<List<Categoria>> SelecionarTodos()
-    {
-        Log.Logger.Debug("Tentando selecionar categorias");
-
-        try
-        {
-            var categoria = _repositorioCategoria.SelecionarTodos();
-
-            Log.Logger.Information($"Categorias selecionadas com sucesso");
-
-            return Result.Ok(categoria);
-        }
-        catch (Exception ex)
-        {
-            string error = "Falha ao tentar selecionar categorias no sistema.";
-
-            Log.Logger.Error(ex, error);
-
-            return Result.Fail(error);
-        }
-    }
-
     public async Task<Result<List<Categoria>>> SelecionarTodosAsync()
     {
         Log.Logger.Debug("Tentando selecionar categorias");
@@ -225,7 +143,7 @@ public class ServicoCategoria : ServicoBase<Categoria, CategoriaValidation>
         {
             _repositorioCategoria.Excluir(categoria);
 
-            _persistContext.SaveContextChanges();
+             await _persistContext.SaveContextAsync();
 
             Log.Logger.Information($"Categoria {categoria} excluida com sucesso!");
 

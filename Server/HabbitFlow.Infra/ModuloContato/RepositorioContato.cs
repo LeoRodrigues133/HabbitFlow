@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HabbitFlow.Infra.ModuloContato;
 
-public class RepositorioContato : RepositorioBase<Contato>
+public class RepositorioContato : RepositorioBase<Contato>, IRepositorioContato
 {
     public RepositorioContato(IPersistContext context) : base(context)
     {

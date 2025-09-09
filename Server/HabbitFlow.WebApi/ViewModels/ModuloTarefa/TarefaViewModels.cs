@@ -22,7 +22,6 @@ public class TarefaViewModels
 
     public class ExcluirTarefaViewModel
     {
-        public Guid Id { get; set; }
         public string Titulo { get; set; }
     }
 

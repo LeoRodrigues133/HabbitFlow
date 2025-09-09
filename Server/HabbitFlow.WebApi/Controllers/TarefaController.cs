@@ -189,7 +189,7 @@ public class TarefaController : ControllerBaseExtension
         if (subtarefa is null)
             return NotFound("Subtarefa não encontrada");
 
-        _servicoTarefa.ExcluirSubtarefa(subtarefa, tarefa);
+        await _servicoTarefa.ExcluirSubtarefa(subtarefa, tarefa);
 
         return Ok();
     }

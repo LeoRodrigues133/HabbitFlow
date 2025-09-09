@@ -13,7 +13,6 @@ public class CategoriaViewModels
 
     public class ExcluirCategoriaViewModel
     {
-        public Guid Id { get; set; }
         public string Titulo { get; set; }
     }
 

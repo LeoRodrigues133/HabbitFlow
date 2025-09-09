@@ -19,95 +19,6 @@ public class ServicoCompromisso : ServicoBase<Compromisso, CompromissoValidation
         _persistContext = persistContext;
     }
 
-    public Result<Compromisso> Cadastrar(Compromisso compromisso)
-    {
-        Log.Logger.Debug($"Tentando cadastrar compromisso {compromisso}");
-
-        Result result = Validar(compromisso);
-
-        if (result.IsFailed)
-            return Result.Fail(result.Errors);
-
-        try
-        {
-            _repositorioCompromisso.Cadastrar(compromisso);
-
-            _persistContext.SaveContextChanges();
-
-            Log.Logger.Information($"Compromisso {compromisso} cadastrado com sucesso!");
-
-            return Result.Ok(compromisso);
-        }
-        catch (Exception ex)
-        {
-            _persistContext.UndoContextChanges();
-
-            string error = "Falha ao tentar cadastrar compromisso no sistema";
-
-            Log.Logger.Error(ex, error + $"{compromisso}");
-
-            return Result.Fail(error);
-        }
-    }
-
-    public Result<Compromisso> Editar(Compromisso compromisso)
-    {
-        Log.Logger.Debug($"Tentando editar compromisso {compromisso}");
-
-        var result = Validar(compromisso);
-
-        if (result.IsFailed)
-            return Result.Fail(result.Errors);
-
-        try
-        {
-            _repositorioCompromisso.Editar(compromisso);
-
-            _persistContext.SaveContextChanges();
-
-            Log.Logger.Information($"Compromisso {compromisso} editada com sucesso!");
-        }
-        catch (Exception ex)
-        {
-            _persistContext.UndoContextChanges();
-
-            string error = "Falha ao tentar editar compromisso no sistema.";
-
-            Log.Logger.Error(ex, error + $"{compromisso}");
-
-            return Result.Fail(error);
-        }
-
-        return Result.Ok(compromisso);
-    }
-
-    public Result Excluir(Compromisso compromisso)
-    {
-        Log.Logger.Debug($"Tentando excluir a compromisso {compromisso}");
-
-        try
-        {
-            _repositorioCompromisso.Excluir(compromisso);
-
-            _persistContext.SaveContextChanges();
-
-            Log.Logger.Information($"Compromisso {compromisso} excluida com sucesso!");
-
-            return Result.Ok();
-
-        }
-        catch (Exception ex)
-        {
-            _persistContext.UndoContextChanges();
-
-            string error = "Falha ao tentar excluir a compromisso do sistema.";
-
-            Log.Logger.Error(ex, error + $"{compromisso}");
-
-            return Result.Fail(error);
-        }
-    }
-
     public async Task<Result<Compromisso>> SelecionarPorIdAsync(Guid id)
     {
         Log.Logger.Debug($"Tentando selecionar compromisso com id: [{id}]");
@@ -159,6 +70,7 @@ public class ServicoCompromisso : ServicoBase<Compromisso, CompromissoValidation
             return Result.Fail(error);
         }
     }
+
     public async Task<Result<Compromisso>> CadastrarAsync(Compromisso compromisso)
     {
         Log.Logger.Debug($"Tentando cadastrar compromisso {compromisso}");

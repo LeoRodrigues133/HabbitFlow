@@ -22,7 +22,6 @@ public class SubtarefasViewModels
 
     public class ExcluirSubtarefaViewModel
     {
-        public Guid id { get; set; }
         public string Titulo { get; set; }
         public Guid tarefaId { get; set; }
     }

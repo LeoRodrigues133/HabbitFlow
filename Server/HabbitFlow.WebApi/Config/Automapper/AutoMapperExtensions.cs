@@ -10,6 +10,7 @@ public static class AutoMapperExtensions
             opt.AddProfile<CompromissoProfile>();
             opt.AddProfile<TarefaProfile>();
             opt.AddProfile<SubtarefaProfile>();
+            opt.AddProfile<ContatoProfile>();
         });
 
         services.AddTransient<UsuarioResolver>();
