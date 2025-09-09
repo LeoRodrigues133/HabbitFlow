@@ -6,7 +6,7 @@ using HabbitFlow.Aplicacao.Compartilhado;
 
 namespace HabbitFlow.Aplicacao.ModuloContato;
 
-public class ServicoContato: ServicoBase<Contato, ContatoValidation>
+public class ServicoContato : ServicoBase<Contato, ContatoValidation>
 {
     IRepositorioContato _repositorioContato;
     IPersistContext _persistContext;
@@ -19,18 +19,18 @@ public class ServicoContato: ServicoBase<Contato, ContatoValidation>
         _persistContext = persistContext;
     }
 
-    public Result<Contato> Cadastrar(Contato contato)
+    public async Task<Result<Contato>> CadastrarAsync(Contato contato)
     {
         Log.Logger.Debug($"Tentando cadastrar contato {contato}");
 
-        Result result = Validar(contato);
+        Result result = await ValidarAsync(contato);
 
         if (result.IsFailed)
             return Result.Fail(result.Errors);
 
         try
         {
-            _repositorioContato.Cadastrar(contato);
+            await _repositorioContato.CadastrarAsync(contato);
 
             _persistContext.SaveContextChanges();
 
@@ -50,11 +50,11 @@ public class ServicoContato: ServicoBase<Contato, ContatoValidation>
         }
     }
 
-    public Result<Contato> Editar(Contato contato)
+    public async Task<Result<Contato>> EditarAsync(Contato contato)
     {
         Log.Logger.Debug($"Tentando editar contato {contato}");
 
-        var result = Validar(contato);
+        var result =  await ValidarAsync(contato);
 
         if (result.IsFailed)
             return Result.Fail(result.Errors);
@@ -81,7 +81,7 @@ public class ServicoContato: ServicoBase<Contato, ContatoValidation>
         return Result.Ok(contato);
     }
 
-    public Result Excluir(Contato contato)
+    public async Task<Result<Contato>> ExcluirAsync(Contato contato)
     {
         Log.Logger.Debug($"Tentando excluir a contato {contato}");
 
@@ -89,7 +89,7 @@ public class ServicoContato: ServicoBase<Contato, ContatoValidation>
         {
             _repositorioContato.Excluir(contato);
 
-            _persistContext.SaveContextChanges();
+            await _persistContext.SaveContextAsync();
 
             Log.Logger.Information($"Contato {contato} excluida com sucesso!");
 
@@ -108,13 +108,13 @@ public class ServicoContato: ServicoBase<Contato, ContatoValidation>
         }
     }
 
-    public Result<Contato> SelecionaPorId(Guid id)
+    public async Task<Result<Contato>> SelecionarPorIdAsync(Guid id)
     {
         Log.Logger.Debug($"Tentando selecionar contato com id: [{id}]");
 
         try
         {
-            var contato = _repositorioContato.SelecionarPorId(id);
+            var contato = await _repositorioContato.SelecionarPorIdAsync(id);
 
             if (contato == null)
             {
@@ -138,13 +138,13 @@ public class ServicoContato: ServicoBase<Contato, ContatoValidation>
         }
     }
 
-    public Result<List<Contato>> SelecionarTodos()
+    public async Task<Result<List<Contato>>> SelecionarTodosAsync()
     {
         Log.Logger.Debug("Tentando selecionar contato");
 
         try
         {
-            var contato = _repositorioContato.SelecionarTodos();
+            var contato = await _repositorioContato.SelecionarTodosAsync();
 
             Log.Logger.Information($"Contato selecionadas com sucesso");
 
@@ -159,5 +159,6 @@ public class ServicoContato: ServicoBase<Contato, ContatoValidation>
             return Result.Fail(error);
         }
     }
+
 
 }
