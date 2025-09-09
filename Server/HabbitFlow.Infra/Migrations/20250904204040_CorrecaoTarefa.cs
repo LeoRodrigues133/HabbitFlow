@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HabbitFlow.Infra.orm.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class CorrecaoTarefa : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -204,7 +204,7 @@ namespace HabbitFlow.Infra.orm.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Titulo = table.Column<string>(type: "varchar(100)", nullable: false),
-                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoriaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -233,7 +233,7 @@ namespace HabbitFlow.Infra.orm.Migrations
                     Link = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Titulo = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Conteudo = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
-                    Hora = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Hora = table.Column<TimeSpan>(type: "time", nullable: true),
                     TipoEnum = table.Column<int>(type: "int", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ContatoId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),

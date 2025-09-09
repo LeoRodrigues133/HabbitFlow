@@ -21,7 +21,7 @@ public class Tarefa : EntidadeBase<Tarefa>
     public string Titulo { get; set; }
 
     public Categoria? Categoria { get; set; }
-    public Guid CategoriaId {  get; set; }
+    public Guid? CategoriaId {  get; set; }
 
     public List<SubTarefa> Subtarefas { get; set; }
 

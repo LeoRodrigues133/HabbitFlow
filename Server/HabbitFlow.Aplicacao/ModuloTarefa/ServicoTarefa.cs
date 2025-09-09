@@ -213,9 +213,6 @@ public class ServicoTarefa : ServicoBase<Tarefa, TarefaValidation>
 
         try
         {
-            var resultSubtarefa = tarefa.SelecionarSubtarefa(subtarefa.Id);
-
-            resultSubtarefa.Titulo = subtarefa.Titulo;
 
             _persistContext.SaveContextChanges();
 

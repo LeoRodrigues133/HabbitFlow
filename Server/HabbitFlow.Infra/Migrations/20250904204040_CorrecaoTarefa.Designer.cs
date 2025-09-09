@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HabbitFlow.Infra.orm.Migrations
 {
     [DbContext(typeof(HabbitFlowDbContext))]
-    [Migration("20250829172715_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250904204040_CorrecaoTarefa")]
+    partial class CorrecaoTarefa
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,8 +132,8 @@ namespace HabbitFlow.Infra.orm.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("Hora")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan?>("Hora")
+                        .HasColumnType("time");
 
                     b.Property<string>("Link")
                         .HasMaxLength(200)
@@ -227,7 +227,7 @@ namespace HabbitFlow.Infra.orm.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CategoriaId")
+                    b.Property<Guid?>("CategoriaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Titulo")

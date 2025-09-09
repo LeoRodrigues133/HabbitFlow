@@ -46,7 +46,7 @@ public class TarefaController : ControllerBaseExtension
     [ProducesResponseType(typeof(ListarTarefaViewModel), 200)]
     [ProducesResponseType(typeof(string[]), 404)]
     [ProducesResponseType(typeof(string[]), 500)]
-    [HttpGet("{id}")]
+    [HttpGet("SelectById/{id}")]
     public async Task<IActionResult> SelecionarPorId(Guid id)
     {
         var result = await _servicoTarefa.SelecionarPorIdAsync(id);
@@ -117,10 +117,10 @@ public class TarefaController : ControllerBaseExtension
     [ProducesResponseType(typeof(ListarSubtarefaViewModel), 200)]
     [ProducesResponseType(typeof(string[]), 400)]
     [ProducesResponseType(typeof(string[]), 500)]
-    [HttpGet("ListarSubtarefas/{id}")]
-    public async Task<IActionResult> ListarSubtarefas(Guid id)
+    [HttpGet("ListarSubtarefas/{tarefaId}")]
+    public async Task<IActionResult> ListarSubtarefas(Guid tarefaId)
     {
-        var result = await _servicoTarefa.SelecionarPorIdAsync(id);
+        var result = await _servicoTarefa.SelecionarPorIdAsync(tarefaId);
 
         var tarefa = result.Value;
 
@@ -135,7 +135,7 @@ public class TarefaController : ControllerBaseExtension
     [ProducesResponseType(typeof(string[]), 400)]
     [ProducesResponseType(typeof(string[]), 404)]
     [ProducesResponseType(typeof(string[]), 500)]
-    [HttpPost("CadastrarSubtarefaAsync")]
+    [HttpPost("subtarefa/cadastrar")]
     public async Task<IActionResult> CadastrarSubtarefa(CadastrarSubtarefaViewModel viewModel)
     {
         var resultSubtarefa = await _servicoTarefa.CadastrarSubtarefaAsync(viewModel.Titulo, viewModel.tarefaId);
@@ -147,19 +147,26 @@ public class TarefaController : ControllerBaseExtension
     [ProducesResponseType(typeof(string[]), 400)]
     [ProducesResponseType(typeof(string[]), 404)]
     [ProducesResponseType(typeof(string[]), 500)]
-    [HttpPost("EditarSubtarefaAsync")]
-    public async Task<IActionResult> EditarSubTarefa(EditarSubtarefaViewModel viewModel)
+    [HttpPut("{tarefaId}/subtarefa/editar/{id}")]
+    public async Task<IActionResult> EditarSubTarefa(Guid tarefaId, Guid id, EditarSubtarefaViewModel viewModel)
     {
-        var resultTarefa = await _servicoTarefa.SelecionarPorIdAsync(viewModel.tarefaId);
-
+    var resultTarefa = await _servicoTarefa.SelecionarPorIdAsync(tarefaId);
         if (resultTarefa.IsFailed)
             return NotFound(resultTarefa.Errors);
 
         var tarefa = resultTarefa.Value;
 
-        var subtarefa = tarefa.SelecionarSubtarefa(viewModel.id);
+        var subtarefa = tarefa.SelecionarSubtarefa(id);
 
-        _servicoTarefa.EditarSubtarefaAsync(subtarefa, tarefa);
+        if (subtarefa is null)
+            return NotFound("Subtarefa não encontrada");
+
+        var viewModelAtualizado = _mapper.Map(viewModel, subtarefa);
+
+        var result = await _servicoTarefa.EditarSubtarefaAsync(subtarefa, tarefa);
+
+        if (result.IsFailed)
+            return BadRequest(result.Errors);
 
         return Ok();
     }
@@ -169,15 +176,18 @@ public class TarefaController : ControllerBaseExtension
     [ProducesResponseType(typeof(string[]), 400)]
     [ProducesResponseType(typeof(string[]), 404)]
     [ProducesResponseType(typeof(string[]), 500)]
-    [HttpPost("ExcluirSubtarefa")]
-    public async Task<IActionResult> ExcluirSubTarefa(ExcluirSubtarefaViewModel viewModel)
+    [HttpDelete("{tarefaId}/subtarefa/excluir/{id}")]
+    public async Task<IActionResult> ExcluirSubTarefa(Guid tarefaId, Guid id)
     {
-        var tarefa = await ObterTarefaAsync(viewModel.tarefaId);
+        var tarefa = await ObterTarefaAsync(tarefaId);
 
         if (tarefa is null)
             return NotFound("Tarefa não encontrada");
 
-        var subtarefa = tarefa.SelecionarSubtarefa(viewModel.id);
+        var subtarefa = tarefa.SelecionarSubtarefa(id);
+
+        if (subtarefa is null)
+            return NotFound("Subtarefa não encontrada");
 
         _servicoTarefa.ExcluirSubtarefa(subtarefa, tarefa);
 
