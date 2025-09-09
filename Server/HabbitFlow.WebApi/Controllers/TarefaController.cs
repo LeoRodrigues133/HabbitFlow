@@ -159,7 +159,7 @@ public class TarefaController : ControllerBaseExtension
 
         var subtarefa = tarefa.SelecionarSubtarefa(viewModel.id);
 
-        _servicoTarefa.EditarSubtarefaAsync(subtarefa, tarefa);
+        await _servicoTarefa.EditarSubtarefaAsync(subtarefa, tarefa);
 
         return Ok();
     }
@@ -179,7 +179,7 @@ public class TarefaController : ControllerBaseExtension
 
         var subtarefa = tarefa.SelecionarSubtarefa(viewModel.id);
 
-        _servicoTarefa.ExcluirSubtarefa(subtarefa, tarefa);
+        await _servicoTarefa.ExcluirSubtarefa(subtarefa, tarefa);
 
         return Ok();
     }

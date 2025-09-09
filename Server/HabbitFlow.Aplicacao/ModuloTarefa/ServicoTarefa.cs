@@ -144,7 +144,7 @@ public class ServicoTarefa : ServicoBase<Tarefa, TarefaValidation>
         {
             _repositorioTarefa.Excluir(tarefa);
 
-            _persistContext.SaveContextChanges();
+            await _persistContext.SaveContextAsync();
 
             Log.Logger.Information($"Tarefa {tarefa} excluida com sucesso!");
 
@@ -217,7 +217,7 @@ public class ServicoTarefa : ServicoBase<Tarefa, TarefaValidation>
 
             resultSubtarefa.Titulo = subtarefa.Titulo;
 
-            _persistContext.SaveContextChanges();
+            await _persistContext.SaveContextAsync();
 
             Log.Logger.Information($"Subtarefa {subtarefa} editada com sucesso!");
         }
@@ -248,7 +248,7 @@ public class ServicoTarefa : ServicoBase<Tarefa, TarefaValidation>
         {
             tarefa.RemoverSubTarefa(subtarefa.Id);
 
-            _persistContext.SaveContextChanges();
+            await _persistContext.SaveContextAsync();
 
             Log.Logger.Information($"SubTarefa {subtarefa} excluida com sucesso!");
 
