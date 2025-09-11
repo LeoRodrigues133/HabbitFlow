@@ -135,10 +135,10 @@ public class TarefaController : ControllerBaseExtension
     [ProducesResponseType(typeof(string[]), 400)]
     [ProducesResponseType(typeof(string[]), 404)]
     [ProducesResponseType(typeof(string[]), 500)]
-    [HttpPost("subtarefa/cadastrar")]
-    public async Task<IActionResult> CadastrarSubtarefa(CadastrarSubtarefaViewModel viewModel)
+    [HttpPost("{tarefaId}/subtarefa/cadastrar")]
+    public async Task<IActionResult> CadastrarSubtarefa(Guid tarefaId, CadastrarSubtarefaViewModel viewModel)
     {
-        var resultSubtarefa = await _servicoTarefa.CadastrarSubtarefaAsync(viewModel.Titulo, viewModel.tarefaId);
+        var resultSubtarefa = await _servicoTarefa.CadastrarSubtarefaAsync(viewModel.Titulo, tarefaId);
 
         return ProcessarResultado(resultSubtarefa.ToResult(), viewModel);
     }
