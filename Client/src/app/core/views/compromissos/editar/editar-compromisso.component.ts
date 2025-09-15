@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CadastrarCompromissoViewModel, EditarCompromissoViewModel, TipoLocalizacaoCompromissoEnum } from '../models/compromisso.models';
-import { CompromissoService } from '../services/compromisso.service';
 import { NgIf, NgForOf } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { CompromissoService } from '../services/compromisso.service';
+import { ListarContatoViewModel } from '../../contatos/models/contato.models';
+import { ListarCategoriaViewModel } from '../../categorias/models/categoria.models';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { EditarCompromissoViewModel, TipoCompromissoEnum } from '../models/compromisso.models';
 
 @Component({
   selector: 'app-editar-compromisso',
@@ -28,12 +30,20 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class EditarCompromissoComponent implements OnInit {
   public form: FormGroup;
-
+  public contatos: ListarContatoViewModel[] = [];
+  public categorias: ListarCategoriaViewModel[] = [];
 
   ngOnInit(): void {
+    this.contatos = this.route.snapshot.data['contatos']
+    this.categorias = this.route.snapshot.data['categorias']
     const compromisso = this.route.snapshot.data['compromisso']
 
-    this.form.patchValue(compromisso);
+    this.form.patchValue({
+      ...compromisso,
+      data: new Date(compromisso.data).toISOString().substring(0, 10),
+      contatoId: compromisso.contatoId,
+      categoriaId: compromisso.categoriaId
+    })
   }
   constructor(
     private fb: FormBuilder,
@@ -55,7 +65,7 @@ export class EditarCompromissoComponent implements OnInit {
           Validators.maxLength(300),
         ],
       ],
-      tipoLocal: [0, [Validators.required]],
+      tipo: [0, [Validators.required]],
       local: ['',
         [
           Validators.required,
@@ -64,14 +74,13 @@ export class EditarCompromissoComponent implements OnInit {
         ]],
       data: [new Date().toISOString().substring(0, 10)],
       hora:
-        [null
-        ],
+        [null],
       contatoId: [],
       categoriaId: []
     });
   }
 
-    editar() {
+  editar() {
     if (this.form.invalid) return;
 
     const registro: EditarCompromissoViewModel = this.form.value;
@@ -86,7 +95,7 @@ export class EditarCompromissoComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
-  public opcoesLocal = Object.values(TipoLocalizacaoCompromissoEnum).filter(
+  public opcoesLocal = Object.values(TipoCompromissoEnum).filter(
     (v) => !Number.isFinite(v)
   );
 
@@ -98,8 +107,8 @@ export class EditarCompromissoComponent implements OnInit {
     return this.form.get('conteudo');
   }
 
-  get tipoLocal() {
-    return this.form.get('tipoLocal');
+  get tipo() {
+    return this.form.get('tipo');
   }
 
   get local() {

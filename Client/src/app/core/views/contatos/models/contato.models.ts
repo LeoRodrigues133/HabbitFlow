@@ -1,4 +1,5 @@
 export interface ListarContatoViewModel {
+  id: string;
   nome: string;
   email: string;
   telefone: string;

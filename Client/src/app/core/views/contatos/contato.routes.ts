@@ -1,6 +1,10 @@
 import { Routes } from "@angular/router";
+import { listagemContatoResolver } from "./services/listagem-contato.resolver";
 import { ListagemContatosComponent } from "./listar/listagem-contatos.component";
-import { listagemContatoResolver } from "./listagem-contato.resolver";
+import { CadastrarContatoComponent } from "./cadastrar/cadastrar-contato.component";
+import { EditarContatoComponent } from "./editar/editar-contato.component";
+import { ExclusaoContatoComponent } from "./excluir/exclusao-contato.component";
+import { visualizarContatoResolver } from "./services/visualizarContatoResolver.resolver";
 
 export const contatosRoutes: Routes = [
   {
@@ -13,5 +17,24 @@ export const contatosRoutes: Routes = [
     component: ListagemContatosComponent,
     resolve: { compromissos: listagemContatoResolver },
   },
+  {
+    path: 'cadastrar',
+    component: CadastrarContatoComponent,
+  },
+  {
+    path: 'editar/:id',
+    component: EditarContatoComponent,
+    resolve: {
+      compromisso: visualizarContatoResolver,
 
+    }
+  },
+  {
+    path: 'excluir/:id',
+    component: ExclusaoContatoComponent,
+    resolve: {
+      compromisso: visualizarContatoResolver
+
+    }
+  }
 ];

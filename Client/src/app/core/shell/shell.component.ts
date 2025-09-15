@@ -71,6 +71,11 @@ export class ShellComponent implements OnInit {
       titulo: 'Tarefas',
       icone: 'task',
       rota: '/tarefa'
+    },
+    {
+      titulo: 'Contatos',
+      icone: 'person',
+      rota: '/contato'
     }
   ];
 

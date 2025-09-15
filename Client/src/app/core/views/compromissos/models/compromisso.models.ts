@@ -1,5 +1,7 @@
+import { ListarCategoriaViewModel } from "../../categorias/models/categoria.models";
+import { ListarContatoViewModel } from "../../contatos/models/contato.models";
 
-export enum TipoLocalizacaoCompromissoEnum {
+export enum TipoCompromissoEnum {
   Remoto,
   Presencial,
 }
@@ -7,7 +9,7 @@ export enum TipoLocalizacaoCompromissoEnum {
 export interface CadastrarCompromissoViewModel {
   titulo: string;
   conteudo?: string;
-  tipoLocal: TipoLocalizacaoCompromissoEnum;
+  tipo: TipoCompromissoEnum;
   local?: string;
   data: Date;
   hora?: string;
@@ -16,10 +18,10 @@ export interface CadastrarCompromissoViewModel {
 }
 
 export interface EditarCompromissoViewModel {
-  id:string;
+  id: string;
   titulo: string;
   conteudo?: string;
-  tipoLocal: TipoLocalizacaoCompromissoEnum;
+  tipo: TipoCompromissoEnum;
   local?: string;
   data: Date;
   hora?: string;
@@ -27,7 +29,7 @@ export interface EditarCompromissoViewModel {
   categoriaId?: string;
 }
 
-export interface ExcluirCompromissoViewModel {}
+export interface ExcluirCompromissoViewModel { }
 
 export interface ListarCompromissoViewModel {
   id: string;
@@ -35,7 +37,7 @@ export interface ListarCompromissoViewModel {
   local?: string;
   conteudo: string;
   data: Date;
-  hora?: string ;
+  hora?: string;
 }
 
 export interface VisualizarCompromissoViewModel {
@@ -45,4 +47,6 @@ export interface VisualizarCompromissoViewModel {
   local?: string;
   data: Date;
   hora?: string;
+  contato: ListarContatoViewModel;
+  categoria?: ListarCategoriaViewModel;
 }

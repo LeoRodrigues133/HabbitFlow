@@ -88,5 +88,13 @@ export const routes: Routes = [
         (r) => r.tarefaRoutes
       ),
     canMatch: [authGuard]
+  },
+  {
+    path: 'contato',
+    loadChildren: () =>
+      import('./core/views/contatos/contato.routes').then(
+        (r) => r.contatosRoutes
+      ),
+    canMatch: [authGuard]
   }
 ];

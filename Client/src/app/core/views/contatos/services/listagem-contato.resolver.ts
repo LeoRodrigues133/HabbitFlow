@@ -1,7 +1,7 @@
 import { ResolveFn } from "@angular/router";
-import { ListarContatoViewModel } from "./models/contato.models";
 import { inject } from "@angular/core";
-import { ContatoService } from "./services/contato.service";
+import { ListarContatoViewModel } from "../models/contato.models";
+import { ContatoService } from "./contato.service";
 
 export const listagemContatoResolver: ResolveFn<
 ListarContatoViewModel[]> = () => {
