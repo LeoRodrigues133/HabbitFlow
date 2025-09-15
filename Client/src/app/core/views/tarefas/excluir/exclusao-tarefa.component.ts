@@ -44,7 +44,7 @@ export class ExclusaoTarefaComponent {
   }
 
   private processarSucesso(): void {
-    console.log(`Categoria excluída com sucesso!`)
+    console.log(`Tarefa excluída com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {

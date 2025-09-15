@@ -44,7 +44,7 @@ export class ExclusaoCompromissoComponent implements OnInit {
   }
 
   private processarSucesso(): void {
-    console.log(`Categoria excluída com sucesso!`)
+    console.log(`Compromisso excluído com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {

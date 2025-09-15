@@ -4,13 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
+import { TarefaService } from '../services/tarefa.service';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { VisualizarCategoriaViewModel } from '../../categorias/models/categoria.models';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DetalhesCategoriasComponent } from '../../categorias/modal/detalhes-categorias.component';
-import { TarefaService } from '../services/tarefa.service';
 
 @Component({
   selector: 'app-detalhes-subtarefas',
@@ -82,8 +82,6 @@ export class DetalhesSubtarefasComponent {
   }
 
   excluirSubtarefa(subtarefa: any) {
-    if (!confirm(`Deseja excluir a subtarefa "${subtarefa.titulo}"?`)) return;
-
     this.tarefaService.excluirSubtarefa(this.tarefa.id, subtarefa.id).subscribe({
       next: () => {
         this.tarefa.subtarefas = this.tarefa.subtarefas.filter((s: any) => s.id !== subtarefa.id);
@@ -95,6 +93,7 @@ export class DetalhesSubtarefasComponent {
   finalizarSubtarefa(_t29: any) {
     throw new Error('Method not implemented.');
   }
+
   constructor(
     private dialogRef: MatDialogRef<DetalhesCategoriasComponent>,
     @Inject(MAT_DIALOG_DATA) public data: VisualizarCategoriaViewModel,
@@ -108,9 +107,8 @@ export class DetalhesSubtarefasComponent {
   }
 
 
-
-  private processarSucesso(registro: any): void {
-    console.log(`Tarefa ${registro.titulo} cadastrada com sucesso!`)
+  private processarSucesso(registro: any, acao:string): void {
+    console.log(`SubTarefa ${registro.titulo} ${acao} com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {

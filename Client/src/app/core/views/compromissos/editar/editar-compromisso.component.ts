@@ -124,7 +124,7 @@ export class EditarCompromissoComponent implements OnInit {
   }
 
   private processarSucesso(registro: EditarCompromissoViewModel): void {
-    console.log(`Categoria ${registro.titulo} cadastrada com sucesso!`)
+    console.log(`Compromisso ${registro.titulo} editado com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {

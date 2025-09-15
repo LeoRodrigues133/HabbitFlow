@@ -15,7 +15,9 @@ export const contatosRoutes: Routes = [
   {
     path: 'listar',
     component: ListagemContatosComponent,
-    resolve: { compromissos: listagemContatoResolver },
+    resolve: {
+      contatos: listagemContatoResolver
+    },
   },
   {
     path: 'cadastrar',
@@ -25,7 +27,7 @@ export const contatosRoutes: Routes = [
     path: 'editar/:id',
     component: EditarContatoComponent,
     resolve: {
-      compromisso: visualizarContatoResolver,
+      contato: visualizarContatoResolver,
 
     }
   },
@@ -33,8 +35,7 @@ export const contatosRoutes: Routes = [
     path: 'excluir/:id',
     component: ExclusaoContatoComponent,
     resolve: {
-      compromisso: visualizarContatoResolver
-
+      contato: visualizarContatoResolver
     }
   }
 ];

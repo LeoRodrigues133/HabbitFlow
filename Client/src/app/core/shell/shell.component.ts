@@ -94,7 +94,7 @@ export class ShellComponent implements OnInit {
     this.categoriaService.categorias$.subscribe(categorias => {
       this.Categorias = categorias;
 
-      console.log(`Shell: ${this.Categorias.map(x => x.titulo)}`)
+      // console.log(`Shell: ${this.Categorias.map(x => x.titulo)}`)
     });
 
     if (!this.Categorias?.length) {

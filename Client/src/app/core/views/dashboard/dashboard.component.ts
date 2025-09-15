@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
       this.categorias = categorias;
       this.categoriaService.atualizarCategorias(categorias)
 
-      console.log(`Dashboard: ${this.categorias.map(x => x.titulo)}`)
+      // console.log(`Dashboard: ${this.categorias.map(x => x.titulo)}`)
     })
 
     this.compromissoService.selecionarTodos().subscribe((compromissos: any) => {

@@ -50,7 +50,7 @@ export class CategoriaService {
   }
 
   atualizarCategorias(categorias: ListarCategoriaViewModel[]) {
-    console.log(`Service: ${categorias.map(x => x.titulo)}`)
+    // console.log(`Service: ${categorias.map(x => x.titulo)}`)
 
     this.categoriasSource.next(categorias);
   }

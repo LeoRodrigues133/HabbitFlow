@@ -79,8 +79,6 @@ export class CadastrarCompromissoComponent implements OnInit {
 
     const registro: CadastrarCompromissoViewModel = this.form.value;
 
-    console.log(registro)
-
     this.compromissoService.cadastrar(registro).subscribe({
       next: (registro) => this.processarSucesso(registro),
       error: (erro) => this.processarFalha(erro)
@@ -119,7 +117,7 @@ export class CadastrarCompromissoComponent implements OnInit {
   }
 
   private processarSucesso(registro: CadastrarCompromissoViewModel): void {
-    console.log(`Categoria ${registro.titulo} cadastrada com sucesso!`)
+    console.log(`Compromisso ${registro.titulo} cadastrado com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {
