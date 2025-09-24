@@ -150,7 +150,7 @@ public class TarefaController : ControllerBaseExtension
     [HttpPut("{tarefaId}/subtarefa/editar/{id}")]
     public async Task<IActionResult> EditarSubTarefa(Guid tarefaId, Guid id, EditarSubtarefaViewModel viewModel)
     {
-    var resultTarefa = await _servicoTarefa.SelecionarPorIdAsync(tarefaId);
+        var resultTarefa = await _servicoTarefa.SelecionarPorIdAsync(tarefaId);
         if (resultTarefa.IsFailed)
             return NotFound(resultTarefa.Errors);
 
@@ -194,6 +194,61 @@ public class TarefaController : ControllerBaseExtension
         return Ok();
     }
 
+    [ProducesResponseType(200)]
+    [ProducesResponseType(typeof(string[]), 400)]
+    [ProducesResponseType(typeof(string[]), 404)]
+    [ProducesResponseType(typeof(string[]), 500)]
+    [HttpPut("{tarefaId}/subtarefa/concluir/{id}")]
+    public async Task<IActionResult> ConcluirSubtarefa(Guid tarefaId, Guid id)
+    {
+        var tarefa = await ObterTarefaAsync(tarefaId);
+
+        if (tarefa is null)
+            return NotFound("Tarefa não encontrada");
+
+        var subtarefa = tarefa.SelecionarSubtarefa(id);
+
+        if (subtarefa is null)
+            return NotFound("Subtarefa não encontrada");
+
+        subtarefa.Concluir();
+
+        var result = await _servicoTarefa.EditarSubtarefaAsync(subtarefa, tarefa);
+
+        if (result.IsFailed)
+            return BadRequest(result.Errors);
+
+        return Ok("Subtarefa concluída com sucesso");
+    }
+
+    [ProducesResponseType(200)]
+    [ProducesResponseType(typeof(string[]), 400)]
+    [ProducesResponseType(typeof(string[]), 404)]
+    [ProducesResponseType(typeof(string[]), 500)]
+    [HttpPut("{tarefaId}/subtarefa/reabrir/{id}")]
+
+    public async Task<IActionResult> ReabrirSubtarefa(Guid tarefaId, Guid id)
+    {
+        var tarefa = await ObterTarefaAsync(tarefaId);
+
+        if (tarefa is null)
+            return NotFound("Tarefa não encontrada");
+
+        var subtarefa = tarefa.SelecionarSubtarefa(id);
+
+        if (subtarefa is null)
+            return NotFound("Subtarefa não encontrada");
+
+        subtarefa.Reabrir();
+
+        var result = await _servicoTarefa.EditarSubtarefaAsync(subtarefa, tarefa);
+
+        if (result.IsFailed)
+            return BadRequest(result.Errors);
+
+        return Ok("Subtarefa reaberta com sucesso");
+    }
+    
     private async Task<Tarefa?> ObterTarefaAsync(Guid tarefaId)
     {
         var resultTarefa = await _servicoTarefa.SelecionarPorIdAsync(tarefaId);

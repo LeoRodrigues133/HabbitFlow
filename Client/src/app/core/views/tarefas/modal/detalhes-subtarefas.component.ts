@@ -1,14 +1,20 @@
-import { NgForOf, NgIf } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import {
+  CadastroSubtarefaViewModel,
+  EdicaoSubtarefaViewModel,
+  listagemSubTarefaViewModel,
+  VisualizarTarefaViewModel
+} from '../models/tarefa.models';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { TarefaService } from '../services/tarefa.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { VisualizarCategoriaViewModel } from '../../categorias/models/categoria.models';
+import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DetalhesCategoriasComponent } from '../../categorias/modal/detalhes-categorias.component';
 
@@ -17,6 +23,7 @@ import { DetalhesCategoriasComponent } from '../../categorias/modal/detalhes-cat
   imports: [
     NgIf,
     NgForOf,
+    NgClass,
     MatDialogModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -25,94 +32,144 @@ import { DetalhesCategoriasComponent } from '../../categorias/modal/detalhes-cat
     MatIconModule,
     MatListModule,
     MatCardModule,
-    FormsModule
+    FormsModule,
+    MatTooltipModule
   ],
   templateUrl: './detalhes-subtarefas.component.html',
   styleUrl: './detalhes-subtarefas.component.scss'
 })
 export class DetalhesSubtarefasComponent {
-  tarefa: any;
+  tarefa: VisualizarTarefaViewModel
+  mostrarInput = false
+  inputSubtarefa = ''
+  subtarefaEmEdicao?: EdicaoSubtarefaViewModel
+  tituloEditando = this.subtarefaEmEdicao?.titulo
 
-  mostrarInput = false;
-  novaSubtitulo = '';
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private dialogRef: MatDialogRef<DetalhesCategoriasComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: VisualizarTarefaViewModel,
+    private tarefaService: TarefaService
+  ) {
+    this.tarefa = data
+    this.tarefa.subtarefas = (this.tarefa.subtarefas || []).filter(s => s != null)
+  }
 
   adicionarSubtarefa() {
-    if (!this.novaSubtitulo.trim()) return;
-
-    const novaSubtarefa = { titulo: this.novaSubtitulo, tarefaId: this.tarefa.id };
-
+    if (!this.inputSubtarefa.trim()) return
+    const novaSubtarefa: CadastroSubtarefaViewModel = {
+      titulo: this.inputSubtarefa,
+      tarefaId: this.tarefa.id,
+      finalizada: false
+    }
     this.tarefaService.cadastrarSubtarefa(this.tarefa.id, novaSubtarefa).subscribe({
-      next: (registro) => {
-        this.tarefa.subtarefas.push(registro);
-
-        this.novaSubtitulo = '';
-        this.mostrarInput = false;
+      next: subtarefa => {
+        this.atualizarListaSubtarefas()
+        this.inputSubtarefa = ''
+        this.mostrarInput = false
+        this.processarSucesso(subtarefa.titulo, 'cadastrada')
       },
-      error: (erro) => this.processarFalha(erro)
-    });
+      error: erro => this.processarFalha(erro)
+    })
   }
-  subtarefaEmEdicao: any = null;
-  tituloEditando = '';
 
-  editarSubtarefa(subtarefa: any) {
-    this.subtarefaEmEdicao = subtarefa;
-    this.tituloEditando = subtarefa.titulo;
+  editarSubtarefa(subtarefa: listagemSubTarefaViewModel) {
+    this.subtarefaEmEdicao = { ...subtarefa, tarefaId: this.tarefa.id }
+    this.tituloEditando = subtarefa.titulo
   }
 
   salvarEdicao(subtarefa: any) {
-    if (!this.tituloEditando.trim()) return;
+    if (!this.tituloEditando?.trim()) return
 
-    const subtarefaEditada = { titulo: this.tituloEditando, tarefaId: this.tarefa.id };
-
+    const subtarefaEditada: EdicaoSubtarefaViewModel = {
+      id: subtarefa.id,
+      titulo: this.tituloEditando,
+      tarefaId: this.tarefa.id,
+      finalizada: subtarefa.finalizada
+    }
     this.tarefaService.editarSubtarefa(this.tarefa.id, subtarefa.id, subtarefaEditada).subscribe({
-      next: (registro) => {
+      next: () => {
+        this.tarefaService.SelecionarTodasSubTarefas(this.tarefa.id).subscribe(subtarefas => {
+          this.tarefa.subtarefas = subtarefas;
+          this.cdr.detectChanges();
 
-        const idx = this.tarefa.subtarefas.findIndex((s: any) => s.id === subtarefa.id);
-        if (idx !== -1) this.tarefa.subtarefas[idx] = registro;
+          this.processarSucesso(subtarefaEditada.titulo, 'editada');
+        });
 
-        this.subtarefaEmEdicao = null;
+        this.subtarefaEmEdicao = undefined;
         this.tituloEditando = '';
-      }
+
+
+      },
+
+      error: erro => this.processarFalha(erro)
     });
+
   }
 
   cancelarEdicao() {
-    this.subtarefaEmEdicao = null;
-    this.tituloEditando = '';
+    this.subtarefaEmEdicao = undefined
+    this.tituloEditando = ''
   }
 
   excluirSubtarefa(subtarefa: any) {
     this.tarefaService.excluirSubtarefa(this.tarefa.id, subtarefa.id).subscribe({
       next: () => {
-        this.tarefa.subtarefas = this.tarefa.subtarefas.filter((s: any) => s.id !== subtarefa.id);
+
+        this.tarefa.subtarefas = this.tarefa.subtarefas.filter(s => s.id !== subtarefa.id)
+
+        this.processarSucesso('selecionada', 'excluida');
       },
-      error: (erro) => this.processarFalha(erro)
-    });
+      error: erro => this.processarFalha(erro)
+    })
   }
 
-  finalizarSubtarefa(_t29: any) {
-    throw new Error('Method not implemented.');
+  finalizarSubtarefa(subtarefa: any) {
+    this.tarefaService.concluirSubtarefa(this.tarefa.id, subtarefa.id, subtarefa).subscribe({
+      next: () => console.log(`Subtarefa ${subtarefa.titulo} finalizada com sucesso!`),
+      error: erro => this.processarFalha(erro)
+    })
   }
 
-  constructor(
-    private dialogRef: MatDialogRef<DetalhesCategoriasComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: VisualizarCategoriaViewModel,
-    private tarefaService: TarefaService
-  ) {
-    this.tarefa = data;
+  reabrirSubtarefa(subtarefa: any) {
+    this.tarefaService.reabrirSubtarefa(this.tarefa.id, subtarefa.id, subtarefa).subscribe({
+      next: () => console.log(`Subtarefa ${subtarefa.titulo} reaberta com sucesso!`),
+      error: erro => this.processarFalha(erro)
+    })
+  }
+
+  alterarStatus(subtarefa: any) {
+    subtarefa.finalizada = !subtarefa.finalizada
+    this.cdr.detectChanges()
+    if (subtarefa.finalizada) {
+      this.tarefaService.concluirSubtarefa(this.tarefa.id, subtarefa.id, subtarefa).subscribe({
+        next: () => console.log(`Subtarefa ${subtarefa.titulo} finalizada com sucesso!`),
+        error: erro => this.processarFalha(erro)
+      })
+    } else {
+      this.tarefaService.reabrirSubtarefa(this.tarefa.id, subtarefa.id, subtarefa).subscribe({
+        next: () => console.log(`Subtarefa ${subtarefa.titulo} reaberta com sucesso!`),
+        error: erro => this.processarFalha(erro)
+      })
+    }
   }
 
   fechar() {
-    this.dialogRef.close(null);
+    this.dialogRef.close(null)
   }
 
-
-  private processarSucesso(registro: any, acao:string): void {
-    console.log(`SubTarefa ${registro.titulo} ${acao} com sucesso!`)
+  private atualizarListaSubtarefas() {
+    this.tarefaService.SelecionarTodasSubTarefas(this.tarefa.id).subscribe(subtarefas => {
+      this.tarefa.subtarefas = (subtarefas || []).filter(s => s != null)
+      this.cdr.detectChanges()
+    })
   }
 
-  private processarFalha(erro: Error): void {
+  private processarSucesso(registro: any, acao: string) {
+    console.log(`SubTarefa ${registro} ${acao} com sucesso!`)
+  }
+
+  private processarFalha(erro: Error) {
     console.log(`Erro: ${erro.message}`)
   }
 }
-

@@ -10,19 +10,18 @@ public class SubtarefasViewModels
     public class CadastrarSubtarefaViewModel
     {
         public string Titulo { get; set; }
-        public Guid tarefaId { get; set; }
+        public bool Finalizada { get; set; }
+
     }
 
     public class EditarSubtarefaViewModel
     {
         public string Titulo { get; set; }
-        public Guid tarefaId { get; set; }
-
+        public bool Finalizada { get; set; }
     }
 
     public class ExcluirSubtarefaViewModel
     {
         public string Titulo { get; set; }
-        public Guid tarefaId { get; set; }
     }
 }

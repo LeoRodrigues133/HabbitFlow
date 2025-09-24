@@ -17,9 +17,26 @@ export interface ExcluirTarefaViewModel { }
 export interface VisualizarTarefaViewModel {
   id: string;
   titulo: string;
+
+  subtarefas: listagemSubTarefaViewModel[]
 }
 
-export interface listagemSubTarefaViewModel{
-  id:string;
-  titulo:string;
+export interface listagemSubTarefaViewModel {
+  id: string;
+  titulo: string;
+  finalizada: boolean;
 }
+
+export interface CadastroSubtarefaViewModel {
+  titulo: string;
+  finalizada: boolean;
+  tarefaId: string
+}
+export interface EdicaoSubtarefaViewModel {
+  id: string;
+  titulo: string;
+  finalizada: boolean;
+  tarefaId: string
+}
+
+export interface ExcluirSubtarefaViewModel{}
