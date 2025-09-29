@@ -12,6 +12,10 @@ public class CompromissoProfile : Profile
         CreateMap<CadastrarCompromissoViewModel, Compromisso>()
             .ForMember(dest => dest.UsuarioId, opt => opt.MapFrom<UsuarioResolver>());
 
+        CreateMap<Compromisso, ListarCompromissoViewModel>()
+                          .ForMember(destino => destino.Data, opt => opt.MapFrom(origem => origem.Data.ToShortDateString()))
+                          .ForMember(destino => destino.Hora, opt => opt.MapFrom(origem => origem.Hora.ToString()));
+
         CreateMap<EditarCompromissoViewModel, Compromisso>();
     }
 }

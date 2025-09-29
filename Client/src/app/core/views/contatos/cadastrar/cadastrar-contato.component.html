@@ -1,0 +1,70 @@
+<main class="container my-5">
+  <div class="row justify-content-center g-3 mt-2">
+    <div class="col col-md-10 col-lg-6">
+      <h1 class="display-3">Cadastro de Contato</h1>
+
+      <hr />
+
+      <form [formGroup]="form" (submit)="cadastrar()">
+        <mat-form-field class="w-100 mt-5" appearance="fill">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" autocomplete="off" placeholder="Ex: José Lopes" />
+          <mat-icon matSuffix color="primary">title</mat-icon>
+          <mat-error class="text-danger" *ngIf="nome?.invalid">
+            <span *ngIf="nome?.errors?.['required']">O Nome precisa ser preenchido.</span>
+            <span *ngIf="nome?.errors?.['minlength']">O Nome deve conter ao menos 3 caracteres.</span>
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" autocomplete="off" placeholder="Ex: Descrição do compromisso" />
+          <mat-icon matSuffix color="primary">mail</mat-icon>
+          <mat-error class="text-danger" *ngIf="email?.invalid">
+            <span *ngIf="email?.errors?.['minlength']">O Email deve conter ao menos de 3 caracteres.</span>
+            <span *ngIf="email?.errors?.['maxlength']">O Email deve conter menos de 100 caracteres.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefone" autocomplete="off" placeholder="Ex: Sala de Reunião" />
+          <mat-icon matSuffix color="primary">phone</mat-icon>
+          <mat-error class="text-danger" *ngIf="telefone?.invalid">
+            O Telefone precisa ser preenchido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Empresa</mat-label>
+          <input matInput formControlName="empresa" autocomplete="off" placeholder="Ex: Sala de Reunião" />
+          <mat-icon matSuffix color="primary">factory</mat-icon>
+          <mat-error class="text-danger" *ngIf="empresa?.invalid">
+            O Empresa precisa ser preenchido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Cargo</mat-label>
+          <input matInput formControlName="cargo" autocomplete="off" placeholder="Ex: Sala de Reunião" />
+          <mat-icon matSuffix color="primary">work</mat-icon>
+          <mat-error class="text-danger" *ngIf="cargo?.invalid">
+            O Cargo precisa ser preenchido.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="row justify-content-end g-2 gap-2 mt-3">
+          <button type="submit" mat-flat-button class="col-sm-4 app-custom-button-color">
+            <mat-icon matIconPrefix>check</mat-icon>
+            Gravar
+          </button>
+          <a mat-button type="button" class="col-sm-4 app-custom-button-color" routerLink="/compromisso/listar">
+            <mat-icon matIconPrefix>keyboard_return</mat-icon>
+            Voltar
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

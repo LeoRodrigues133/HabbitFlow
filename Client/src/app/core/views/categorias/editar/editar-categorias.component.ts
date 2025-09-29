@@ -72,7 +72,7 @@ export class EditarCategoriasComponent implements OnInit {
   }
 
   private processarSucesso(registro: EditarCategoriaViewModel): void {
-    console.log(`Categoria ${registro.titulo} cadastrada com sucesso!`)
+    console.log(`Categoria ${registro.titulo} editada com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {

@@ -69,7 +69,7 @@ export class EditarTarefaComponent {
   }
 
   private processarSucesso(registro: EditarTarefaViewModel): void {
-    console.log(`Categoria ${registro.titulo} cadastrada com sucesso!`)
+    console.log(`Tarefa ${registro.titulo} cadastrada com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {

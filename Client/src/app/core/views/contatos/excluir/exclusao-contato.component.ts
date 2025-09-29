@@ -1,54 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListItemIcon } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { RouterLink, Router, ActivatedRoute } from '@angular/router';
-import { CategoriaService } from '../../categorias/services/categoria.service';
-import { VisualizarTarefaViewModel } from '../models/tarefa.models';
-import { TarefaService } from '../services/tarefa.service';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { VizualiarContatoViewModel } from '../models/contato.models';
+import { ContatoService } from '../services/contato.service';
 
 @Component({
-  selector: 'app-exclusao-tarefa',
-  imports: [
+  selector: 'app-exclusao-contato',
+  imports: [[
     RouterLink,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
     MatListItemIcon
-  ],
-  templateUrl: './exclusao-tarefa.component.html',
-  styleUrl: './exclusao-tarefa.component.scss'
+  ]],
+  templateUrl: './exclusao-contato.component.html',
+  styleUrl: './exclusao-contato.component.scss'
 })
-export class ExclusaoTarefaComponent {
-  Tarefa?: VisualizarTarefaViewModel;
+export class ExclusaoContatoComponent implements OnInit {
+  Contato?: VizualiarContatoViewModel;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private tarefaService: TarefaService,
+    private contatoService: ContatoService,
   ) {
 
   }
   ngOnInit(): void {
-    this.Tarefa = this.route.snapshot.data['tarefa'];
+    this.Contato = this.route.snapshot.data['contato'];
   }
 
   excluir() {
-    this.tarefaService.excluir(this.Tarefa!.id).subscribe({
+    this.contatoService.excluir(this.Contato!.id).subscribe({
       next: () => this.processarSucesso(),
       error: (erro) => this.processarFalha(erro)
     });
+
+    this.router.navigate(['/dashboard']);
   }
 
   private processarSucesso(): void {
-    console.log(`Tarefa excluída com sucesso!`)
+    console.log(`Contato excluído com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {
     console.log(`Erro: ${erro.message}`)
   }
-
 }

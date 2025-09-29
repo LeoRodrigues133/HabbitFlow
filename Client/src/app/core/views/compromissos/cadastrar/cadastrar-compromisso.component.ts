@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgIf, NgForOf, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -7,8 +7,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CompromissoService } from '../services/compromisso.service';
-import { CadastrarCompromissoViewModel, TipoLocalizacaoCompromissoEnum } from '../models/compromisso.models';
+import { CadastrarCompromissoViewModel, TipoCompromissoEnum } from '../models/compromisso.models';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ListarContatoViewModel } from '../../contatos/models/contato.models';
+import { ListarCategoriaViewModel } from '../../categorias/models/categoria.models';
 
 @Component({
   selector: 'app-cadastro-compromisso',
@@ -21,13 +23,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+
   ],
   templateUrl: './cadastrar-compromisso.component.html',
   styleUrl: './cadastrar-compromisso.component.scss'
 })
-export class CadastrarCompromissoComponent {
+export class CadastrarCompromissoComponent implements OnInit {
   public form: FormGroup;
+  public contatos: ListarContatoViewModel[] = [];
+  public categorias: ListarCategoriaViewModel[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +54,7 @@ export class CadastrarCompromissoComponent {
           Validators.maxLength(300),
         ],
       ],
-      tipoLocal: [0, [Validators.required]],
+      tipo: [0, [Validators.required]],
       local: ['',
         [
           Validators.required,
@@ -58,19 +63,21 @@ export class CadastrarCompromissoComponent {
         ]],
       data: [new Date().toISOString().substring(0, 10)],
       hora:
-        [null
-        ],
+        [null],
       contatoId: [],
       categoriaId: []
     });
   }
 
-    cadastrar() {
+  ngOnInit(): void {
+    this.contatos = this.route.snapshot.data['contatos'];
+    this.categorias = this.route.snapshot.data['categorias'];
+  }
+
+  cadastrar() {
     if (this.form.invalid) return;
 
     const registro: CadastrarCompromissoViewModel = this.form.value;
-
-    console.log(registro)
 
     this.compromissoService.cadastrar(registro).subscribe({
       next: (registro) => this.processarSucesso(registro),
@@ -80,7 +87,7 @@ export class CadastrarCompromissoComponent {
     this.router.navigate(['/dashboard']);
   }
 
-  public opcoesLocal = Object.values(TipoLocalizacaoCompromissoEnum).filter(
+  public opcoesLocal = Object.values(TipoCompromissoEnum).filter(
     (v) => !Number.isFinite(v)
   );
 
@@ -92,8 +99,9 @@ export class CadastrarCompromissoComponent {
     return this.form.get('conteudo');
   }
 
-  get tipoLocal() {
-    return this.form.get('tipoLocal');
+
+  get tipo() {
+    return this.form.get('tipo');
   }
 
   get local() {
@@ -109,7 +117,7 @@ export class CadastrarCompromissoComponent {
   }
 
   private processarSucesso(registro: CadastrarCompromissoViewModel): void {
-    console.log(`Categoria ${registro.titulo} cadastrada com sucesso!`)
+    console.log(`Compromisso ${registro.titulo} cadastrado com sucesso!`)
   }
 
   private processarFalha(erro: Error): void {

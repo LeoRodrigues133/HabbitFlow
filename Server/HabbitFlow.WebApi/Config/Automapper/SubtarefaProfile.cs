@@ -10,11 +10,9 @@ public class SubtarefaProfile : Profile
     {
         CreateMap<SubTarefa, ListarSubtarefaViewModel>();
 
-        CreateMap<CadastrarSubtarefaViewModel, SubTarefa>()
-            .ForMember(dest => dest.TarefaId, opt => opt.MapFrom(x => x.tarefaId));
+        CreateMap<CadastrarSubtarefaViewModel, SubTarefa>();
 
-        CreateMap<EditarSubtarefaViewModel, SubTarefa>()
-            .ForMember(dest => dest.TarefaId, opt => opt.MapFrom(x => x.tarefaId));
+        CreateMap<EditarSubtarefaViewModel, SubTarefa>();
 
     }
 }
