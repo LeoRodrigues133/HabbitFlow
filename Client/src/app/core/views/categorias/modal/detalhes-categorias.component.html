@@ -1,19 +1,12 @@
-<mat-card-title mat-dialog-title
-class="d-flex align-items-center justify-content-center gap-3">
+<mat-card-title mat-dialog-title class="d-flex align-items-center justify-content-between gap-3">
   {{ categoria.titulo }}
-  <span class="float-right d-flex gap-2">
-    <button mat-mini-fab
-    [routerLink]="['/categoria','editar',categoria.id]"
-    (click)="fechar()"
-    class="app-custom-button-color mat-elevation-z0"
-    >
+  <span class="d-flex gap-2">
+    <button mat-mini-fab matTooltip="Editar categoria" [routerLink]="['/categoria','editar',categoria.id]"
+      (click)="fechar()" class="btn-acao editar mat-elevation-z0">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-mini-fab
-    aria-label="Excluir categoria"
-    [routerLink]="['/categoria','excluir',categoria.id]"
-    (click)="fechar()"
-    class="app-custom-button-color mat-elevation-z0">
+    <button mat-mini-fab matTooltip="Excluir categoria" [routerLink]="['/categoria','excluir',categoria.id]"
+      (click)="fechar()" class="btn-acao excluir mat-elevation-z0">
       <mat-icon>delete</mat-icon>
     </button>
   </span>
@@ -21,66 +14,80 @@ class="d-flex align-items-center justify-content-center gap-3">
 
 <mat-dialog-content class="d-flex gap-3">
 
-  <!-- Compromissos -->
   <mat-card class="p-3 flex-fill bg-body-secondary">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h3 class="mb-0">Compromissos</h3>
-      <button mat-mini-fab color="primary" aria-label="Novo compromisso"
-        class="app-custom-button-color mat-elevation-z0">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-
-    <div class="d-flex flex-column gap-2 overflow-y-auto">
-      <div class="d-flex justify-content-between align-items-center p-2 border rounded">
-        <div>
-          <strong>Reunião com equipe</strong><br />
-          <small class="text-muted">24/08/2025 14:00</small>
-        </div>
-        <div class="d-flex gap-1">
-          <button mat-icon-button color="primary" aria-label="Editar compromisso">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" aria-label="Excluir compromisso">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-  </mat-card>
-
-  <!-- Tarefas -->
-  <mat-card class="p-3 flex-fill bg-body-secondary">
-    <div class="d-flex justify-content-between align-items-center mb-2">
-      <h3 class="mb-0">Tarefas</h3>
-
-      <div class="row gap-3">
-        <button mat-mini-fab color="primary" aria-label="Visualizar tarefas"
-          class="app-custom-button-color mat-elevation-z0">
-          <mat-icon>list_alt_check</mat-icon>
+      <div class="d-flex gap-2">
+        <button mat-mini-fab matTooltip="Listar compromissos" class="btn-acao acao mat-elevation-z0"
+          routerLink="/compromisso/listar" (click)="fechar()">
+          <mat-icon>list</mat-icon>
         </button>
-        <button mat-mini-fab color="primary" aria-label="Nova tarefa" class="app-custom-button-color mat-elevation-z0">
+        <button mat-mini-fab matTooltip="Novo compromisso" class="app-custom-button-color mat-elevation-z0"
+          [routerLink]="['/compromisso', 'cadastrar']" (click)="fechar()">
           <mat-icon>add</mat-icon>
         </button>
       </div>
     </div>
 
     <div class="d-flex flex-column gap-2 overflow-y-auto">
-
-      <div class="d-flex justify-content-between align-items-center p-2 border rounded">
+      <div *ngFor="let c of compromissos" class="d-flex justify-content-between align-items-center p-2 border rounded">
         <div>
-          <strong class="text-decoration-line-through">Finalizar protótipo</strong>
+          <strong>{{ c.titulo }}</strong><br />
+          <small class="text-muted">{{ c.data | date:'dd/MM/yyyy' }} {{ c.hora || 'Sem horario' }}</small>
+        </div>
+        <div class="d-flex gap-1">
+          <button mat-icon-button matTooltip="Editar compromisso" [routerLink]="['/compromisso','editar',c.id]"
+            (click)="fechar()" class="btn-acao editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Excluir compromisso" [routerLink]="['/compromisso','excluir',c.id]"
+            (click)="fechar()" class="btn-acao excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </div>
+      <div *ngIf="!compromissos || compromissos.length === 0" class="text-muted">Nenhum compromisso cadastrado</div>
+    </div>
+  </mat-card>
 
+  <mat-card class="p-3 flex-fill bg-body-secondary">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h3 class="mb-0">Tarefas</h3>
+      <div class="d-flex gap-2">
+        <button mat-mini-fab matTooltip="Listar tarefas" class="btn-acao acao mat-elevation-z0"
+          routerLink="/tarefa/listar" (click)="fechar()">
+
+          <mat-icon>list</mat-icon>
+        </button>
+        <button mat-mini-fab matTooltip="Nova tarefa" class="app-custom-button-color mat-elevation-z0"
+          [routerLink]="['/tarefa', 'cadastrar']" (click)="fechar()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column gap-2 overflow-y-auto">
+      <div *ngFor="let t of tarefas" class="d-flex justify-content-between align-items-center p-2 border rounded">
+        <div>
+          <strong>{{ t.titulo }}</strong>
+        </div>
+        <div class="d-flex gap-1">
+          <button mat-icon-button matTooltip="Editar tarefa" [routerLink]="['/tarefa','editar',t.id]" (click)="fechar()"
+            class="btn-acao editar">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Excluir tarefa" [routerLink]="['/tarefa','excluir',t.id]"
+            (click)="fechar()" class="btn-acao excluir">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="!tarefas || tarefas.length === 0" class="text-muted">Nenhuma tarefa cadastrada</div>
     </div>
   </mat-card>
 
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-stroked-button (click)="fechar()">Fechar</button>
+<mat-dialog-actions>
+  <button class="app-custom-button-color mat-elevation-z0" mat-stroked-button (click)="fechar()">Fechar</button>
 </mat-dialog-actions>
-
-
-<!--Depois aperfeiçoar esse layout-->

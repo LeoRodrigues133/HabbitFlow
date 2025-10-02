@@ -38,6 +38,7 @@ export interface ListarCompromissoViewModel {
   conteudo: string;
   data: Date;
   hora?: string;
+  categoriaId: string;
 }
 
 export interface VisualizarCompromissoViewModel {

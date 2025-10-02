@@ -16,17 +16,13 @@
         possível recuperar estes dados posteriormente.
       </p>
 
-      <div class="row justify-content-end g-2 gap-2 mt-5">
-        <button
-        type="button"
-        mat-flat-button
-        class="col-sm-4 app-custom-button-color"
-        (click)="excluir()">
+      <div class="row justify-content-end g-2 gap-2 mt-3">
+        <button type="button" mat-flat-button class="col-sm-4 app-custom-button-color" (click)="excluir()">
           <mat-icon matListItemIcon>delete</mat-icon>
           Confirmar
         </button>
-        <a mat-button type="button" class="col-sm-4 app-custom-button-color-50" routerLink="/dashboard">
-          <mat-icon matListItemIcon>arrow_back</mat-icon>
+        <a mat-button type="button" class="col-sm-4 app-custom-button-color" routerLink="/dashboard">
+          <mat-icon matIconPrefix>keyboard_return</mat-icon>
           Voltar
         </a>
       </div>

@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EditarContatoViewModel } from '../models/contato.models';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-editar-contato',
@@ -17,6 +18,7 @@ import { EditarContatoViewModel } from '../models/contato.models';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonModule,
     MatFormFieldModule,
     ReactiveFormsModule
   ],

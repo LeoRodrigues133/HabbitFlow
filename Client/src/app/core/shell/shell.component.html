@@ -1,38 +1,29 @@
 <mat-sidenav-container class="sidenav-container bg-body-secondary">
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false"
-    *ngIf="usuarioAutenticado">
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="usuarioAutenticado != undefined && (isHandset$ | async) === false">
     <mat-toolbar>
       <img src="/logo.png" style="width: 60px; height: 60px;">
       {{ title }}
     </mat-toolbar>
 
-
     <mat-nav-list class="d-flex flex-column justify-content-between">
 
-      <!-- Links públicos -->
       <ng-container *ngIf="!usuarioAutenticado">
-
         <a *ngFor="let link of Links" mat-list-item [routerLink]="link.rota" matTooltip="Ir para {{ link.titulo }}">
           <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
           {{ link.titulo }}
         </a>
       </ng-container>
-      <!-- Links públicos -->
-
-      <!-- Links autenticados -->
 
       <ng-container *ngIf="usuarioAutenticado" class="h-100">
-
-        <a *ngFor="let link of LinksAuteticados" mat-list-item [routerLink]="link.rota" class="app-flat-nav-item "
+        <a *ngFor="let link of LinksAuteticados" mat-list-item [routerLink]="link.rota" class="app-flat-nav-item"
           matTooltip="Ir para {{ link.titulo }}">
           <mat-icon matListItemIcon>{{ link.icone }}</mat-icon>
           {{ link.titulo }}
         </a>
 
-
-        <mat-accordion class="app-flat-accordion flex-grow-1"
-        >
+        <mat-accordion class="app-flat-accordion flex-grow-1">
           <mat-expansion-panel *ngFor="let link of Acordion" matTooltip="Abrir categorias">
             <mat-expansion-panel-header>
               <mat-panel-title class="gap-4" mat-list-item>
@@ -43,7 +34,6 @@
 
             <a *ngFor="let item of Categorias" mat-list-item class="app-flat-nav-item" (click)="abrirModal(item)"
               matTooltip="Visualizar {{ item.titulo }}">
-              <!-- [routerLink]="['/categoria','editar',item.id]"> -->
               <mat-icon matListItemIcon>drag_handle</mat-icon>
               {{ item.titulo }}
             </a>
@@ -52,29 +42,22 @@
 
         <span class="p-1">
           <span>Olá, {{ usuarioAutenticado.nome }}</span>
-          <button (click)="logoutEfetuado()" mat-button class="app-custom-flat-button-color w-100">
+          <button (click)="logoutEfetuado()" mat-button class="app-custom-flat-button-color app-custom-button-color w-100">
             <mat-icon>logout</mat-icon>
             Logout
           </button>
         </span>
-
       </ng-container>
 
     </mat-nav-list>
-
   </mat-sidenav>
 
-
-
   <mat-sidenav-content>
-
-    @if (isHandset$ | async) {
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+    <button *ngIf="isHandset$ | async" type="button" aria-label="Toggle sidenav" mat-icon-button
+      (click)="drawer.toggle()">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-    }
 
     <ng-content></ng-content>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,25 +1,29 @@
 <main class="container my-4">
   <div class="row g-3 mt-2">
+    <!-- Título -->
     <h1 class="fs-2 text-center">Listagem de Tarefas</h1>
 
-    <section aria-label="Opções" class="row justify-content-end g-1 gap-2">
-      <a mat-flat-button class="col-lg-4 col-xxl-2 fs-6 py-4 app-custom-button-color"
-        [routerLink]="['/tarefa', 'cadastrar']">
+    <!-- Botão de cadastro -->
+    <section aria-label="Opções" class="row justify-content-end g-1 gap-2 mb-3">
+      <a mat-flat-button class="col-lg-4 col-xxl-2 fs-6 py-3 app-custom-button-color"
+         [routerLink]="['/tarefa', 'cadastrar']">
         <mat-icon>add_circle</mat-icon>
-        Cadastrar
+        <span class="ms-2">Nova Tarefa</span>
       </a>
     </section>
 
     <hr />
 
-    <div *ngFor="let item of tarefas; index as i" class="col-md-6 col-lg-4">
-
-      <mat-card class="card-listagem card-animado mat-mdc-elevation-specific mat-elevation-z3 h-100">
+    <!-- Cards de tarefas -->
+    <div *ngFor="let item of tarefas; index as i" class="col-md-6 col-lg-4 d-flex">
+      <mat-card class="card-listagem mat-mdc-elevation-specific mat-elevation-z3 flex-fill h-100">
+        <!-- Cabeçalho -->
         <mat-card-header>
           <mat-card-title>{{ item.titulo }}</mat-card-title>
         </mat-card-header>
 
-        <mat-card-content class="d-grid mt-4">
+        <!-- Conteúdo -->
+        <mat-card-content class="d-grid mt-3 gap-2">
           <strong>Subtarefas:</strong>
           <mat-list *ngIf="(item.subtarefas?.length || 0) > 0; else semSubtarefas">
             <mat-list-item *ngFor="let sub of item.subtarefas">
@@ -27,24 +31,25 @@
               {{ sub.titulo }}
             </mat-list-item>
           </mat-list>
-
           <ng-template #semSubtarefas>
             <span>Nenhuma subtarefa cadastrada</span>
           </ng-template>
         </mat-card-content>
-        <mat-card-footer class="d-flex justify-content-end gap-1 p-3 mt-auto">
-          <a mat-mini-fab class="app-custom-button-color mat-elevation-z0" matTooltip="Listar subtarefas"
-          (click)="abrirModal(item)">
+
+        <!-- Rodapé com ações -->
+        <mat-card-footer class="d-flex justify-content-end gap-2 p-3 mt-auto">
+          <a mat-mini-fab class="btn-acao acao mat-elevation-z0" matTooltip="Listar subtarefas"
+             (click)="abrirModal(item)">
             <mat-icon>list</mat-icon>
           </a>
 
-          <a mat-mini-fab class="app-custom-button-color mat-elevation-z0" matTooltip="Editar {{ item.titulo }}"
-            [routerLink]="['/tarefa', 'editar', item.id]">
+          <a mat-mini-fab class="btn-acao editar mat-elevation-z0" matTooltip="Editar {{ item.titulo }}"
+             [routerLink]="['/tarefa', 'editar', item.id]">
             <mat-icon>edit</mat-icon>
           </a>
 
-          <a mat-mini-fab class="app-custom-button-color mat-elevation-z0" matTooltip="Excluir {{ item.titulo }}"
-            [routerLink]="['/tarefa', 'excluir', item.id]">
+          <a mat-mini-fab class="btn-acao excluir mat-elevation-z0" matTooltip="Excluir {{ item.titulo }}"
+             [routerLink]="['/tarefa', 'excluir', item.id]">
             <mat-icon>delete</mat-icon>
           </a>
         </mat-card-footer>

@@ -1,56 +1,88 @@
-<main class="container py-4">
-  <mat-card class="mat-elevation-z4 p-4">
+<main class="dashboard-container py-4">
 
-    <mat-card-title class="mb-4">Resumo Geral</mat-card-title>
+  <div class="dashboard-grid">
 
-    <div class="d-flex justify-content-between gap-4">
-
-      <!-- Categorias -->
-      <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
-        <mat-card-header class="justify-content-between">
-          <mat-card-title>Categorias</mat-card-title>
-          <a
-          mat-mini-fab
-          matTooltip="Adicionar categoria"
-          class="app-custom-button-color mat-elevation-z0"
-            [routerLink]="['/categoria', 'cadastrar']">
-            <mat-icon>add</mat-icon>
-          </a>
-        </mat-card-header>
+    <mat-card class="dashboard-card">
+      <mat-card-header class="justify-content-between">
+        <mat-card-title>Categorias</mat-card-title>
+        <a mat-mini-fab matTooltip="Adicionar categoria" class="app-custom-button-color mat-elevation-z0"
+          [routerLink]="['/categoria', 'cadastrar']">
+          <mat-icon>add</mat-icon>
+        </a>
+      </mat-card-header>
+      <div class="card-content">
         <h2>{{ categorias.length || 0 }}</h2>
-      </mat-card>
+        <small>total de categorias cadastradas</small>
+      </div>
+    </mat-card>
 
-      <!-- Compromissos -->
-      <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
-        <mat-card-header class="justify-content-between">
-          <mat-card-title>Compromissos</mat-card-title>
-          <a
-          mat-mini-fab
-          matTooltip="Adicionar compromisso"
-          class="app-custom-button-color mat-elevation-z0"
+    <mat-card class="dashboard-card">
+      <mat-card-header class="justify-content-between">
+        <mat-card-title>Compromissos</mat-card-title>
+        <a mat-mini-fab matTooltip="Adicionar compromisso" class="app-custom-button-color mat-elevation-z0"
           [routerLink]="['/compromisso','cadastrar']">
-            <mat-icon>add</mat-icon>
-          </a>
-        </mat-card-header>
+          <mat-icon>add</mat-icon>
+        </a>
+      </mat-card-header>
+      <div class="card-content">
         <h2>{{ compromissos.length || 0 }}</h2>
-      </mat-card>
+        <small>próximos compromissos agendados</small>
+        <ul class="mini-list">
+          <li *ngFor="let c of compromissos | slice:0:3">
+            <mat-icon>event</mat-icon> {{ c.titulo }} - {{ c.data | date:'shortDate' }}
+          </li>
+        </ul>
+      </div>
+    </mat-card>
 
-      <!-- Contatos -->
-      <mat-card class="mat-elevation-z2 flex-fill text-center p-3">
-        <mat-card-header class="justify-content-between">
-          <mat-card-title>Tarefas</mat-card-title>
-          <button
-          mat-mini-fab
-          matTooltip="Adicionar tarefa"
-          class="app-custom-button-color mat-elevation-z0"
+    <mat-card class="dashboard-card">
+      <mat-card-header class="justify-content-between">
+        <mat-card-title>Tarefas</mat-card-title>
+        <a mat-mini-fab matTooltip="Adicionar tarefa" class="app-custom-button-color mat-elevation-z0"
           [routerLink]="['/tarefa','cadastrar']">
-            <mat-icon>add</mat-icon>
-          </button>
-        </mat-card-header>
+          <mat-icon>add</mat-icon>
+        </a>
+      </mat-card-header>
+      <div class="card-content">
         <h2>{{ tarefas.length || 0 }}</h2>
-      </mat-card>
+        <small>tarefas pendentes</small>
+        <ul class="mini-list">
+          <li *ngFor="let t of tarefas | slice:0:3">
+            <mat-icon>check_circle_outline</mat-icon> {{ t.titulo }}
+          </li>
+        </ul>
+      </div>
+    </mat-card>
 
-    </div>
+    <mat-card class="dashboard-card">
+      <div>
+        <mat-card-header>
+          <mat-card-title>Calendário</mat-card-title>
+        </mat-card-header>
+        <mat-calendar [(selected)]="dataSelecionada"
+        (selectedChange)="filtrarEventos($event!)">
+        </mat-calendar>
+      </div>
+    </mat-card>
 
-  </mat-card>
+    <mat-card class="dashboard-card">
+      <div class="calendar-events">
+        <mat-card-header>
+          <mat-card-title>Eventos do dia</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-list-item *ngFor="let ev of eventosDoDia">
+            <mat-icon matListItemIcon>event_note</mat-icon>
+            {{ ev.titulo }}
+            <span>-</span>
+            <span class="text-muted">{{ ev.hora || 'Sem horário'}}</span>
+          </mat-list-item>
+
+          <mat-list-item *ngIf="eventosDoDia.length === 0">Nenhum evento hoje</mat-list-item>
+        </mat-card-content>
+      </div>
+    </mat-card>
+
+  </div>
 </main>

@@ -1,25 +1,137 @@
-/* You can add global styles to this file, and also import other style files */
-
 @use "bootstrap/scss/bootstrap-reboot";
 @use "bootstrap/scss/bootstrap-grid";
 @use "bootstrap/scss/bootstrap-utilities";
-@use "app/assets/css/matElevation.css"; //Mat elevation não funciona nessa versão;
-                                        //Sobrescrevi para poder utilizar a funcionalidade;
+@use "app/assets/css/matElevation.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
 
 .app-custom-button-color {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  color: #ffffffe0 !important;
+  background: linear-gradient(135deg, #6f4ba4, #89b582) !important;
+  color: #fff !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out !important;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  &:disabled {
+    background: #ccc !important;
+    color: #666 !important;
+    box-shadow: none;
+    transform: none;
+  }
 }
-.app-custom-flat-button-color {
-  background-color: #89b582ce !important;
-  color: #000000 !important;
+
+.mat-mini-fab.app-custom-button-color {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-icon {
+    font-size: 20px;
+  }
 }
-.app-custom-button-color-50 {
-  color: #6e4ba4 !important;
+
+.mat-mdc-form-field {
+  width: 100%;
+
+  .mat-mdc-text-field-wrapper {
+    border-radius: 8px;
+  }
 }
-.app-custom-button-color-50:hover {
-  background-color: #89b5827e !important;
+
+
+.card-listagem,
+.dashboard-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+  padding: 1rem;
+
+  &:hover {
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  }
+
+  mat-card-header {
+    background: rgba(111, 75, 164, 0.1);
+    padding: 1rem;
+    margin: -20px;
+    margin-bottom: 10px;
+
+    mat-card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #6F4BA4;
+    }
+  }
+
+  mat-card-content {
+    font-size: 0.95rem;
+
+    strong {
+      color: #40434A;
+    }
+  }
+
+  mat-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #F7F7F7;
+  }
+}
+
+.btn-acao {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  &.editar {
+    background-color: #89B582 !important;
+    color: #fff !important;
+
+    &:hover {
+      background-color: #6FA16C !important;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &.excluir {
+    background-color: #E57373 !important;
+    color: #fff !important;
+
+    &:hover {
+      background-color: #D32F2F !important;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &.acao {
+    background-color: #6790d2 !important;
+    color: #fff !important;
+
+    &:hover {
+      background-color: #2b68c9 !important;
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
 }
