@@ -72,5 +72,5 @@ Execute o projeto:
 ```bash
 dotnet run
 ```
-A API poderá ser acessada no endereço https://localhost:7777/api.
-A documentação OpenAPI também estará disponível em: https://localhost:7777/swagger.
+A API poderá ser acessada no endereço https://localhost:4201/api.
+A documentação OpenAPI também estará disponível em: https://localhost:4201/swagger.
