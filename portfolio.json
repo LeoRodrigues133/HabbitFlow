@@ -1,6 +1,6 @@
 {
   "title": "HabbitFlow",
-  "description": "O HabbitFlow é um app pensado para facilitar sua rotina. Ele ajuda você a organizar tarefas, compromissos e hábitos do dia a dia de forma simples, com uma interface dinâmica e fácil de usar.",
+  "description": "O HabbitFlow é uma aplicação desenvolvida em Angular para gestão de rotinas. Ele permite organizar tarefas, compromissos e hábitos de forma clara e eficiente, contando com uma interface dinâmica, moderna e de fácil utilização.",
   "gif": "https://raw.githubusercontent.com/LeoRodrigues133/HabbitFlow/refs/heads/master/Client/public/Prototipo.png",
   "lastCommit": "Ajustado design do projeto;"
 }
