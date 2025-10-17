@@ -99,7 +99,6 @@ export class CadastrarCompromissoComponent implements OnInit {
     return this.form.get('conteudo');
   }
 
-
   get tipo() {
     return this.form.get('tipo');
   }

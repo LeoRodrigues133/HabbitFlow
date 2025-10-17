@@ -7,7 +7,8 @@ public class TarefaProfile : Profile
 {
     public TarefaProfile()
     {
-        CreateMap<Tarefa, ListarTarefaViewModel>();
+        CreateMap<Tarefa, ListarTarefaViewModel>()
+            .ForMember(dest => dest.qtSubtarefas, opt => opt.MapFrom(src => src.Subtarefas.Count));
 
         CreateMap<CadastrarTarefaViewModel, Tarefa>()
             .ForMember(dest => dest.UsuarioId, opt => opt.MapFrom<UsuarioResolver>());

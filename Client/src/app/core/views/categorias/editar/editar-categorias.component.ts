@@ -10,7 +10,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CategoriaService } from '../services/categoria.service';
 import { EditarCategoriaViewModel } from '../models/categoria.models';
-import { MatListItemIcon } from "@angular/material/list";
 
 @Component({
   selector: 'app-editar-categorias',
@@ -24,7 +23,6 @@ import { MatListItemIcon } from "@angular/material/list";
     MatButtonModule,
     MatSelectModule,
     MatCardModule,
-    MatListItemIcon
 ],
   templateUrl: './editar-categorias.component.html',
   styleUrl: './editar-categorias.component.scss'

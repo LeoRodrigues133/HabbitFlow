@@ -6,6 +6,7 @@ import { EditarTarefaComponent } from "./editar/editar-tarefa.component"
 import { visualizarTarefaResolver } from "./services/visualizar-tarefa.resolver"
 import { ExclusaoTarefaComponent } from "./excluir/exclusao-tarefa.component"
 import { DetalhesSubtarefasComponent } from "./modal/detalhes-subtarefas.component"
+import { listagemCategoriasResolver } from "../categorias/services/listagem-categoria.resolver"
 
 export const tarefaRoutes: Routes = [
   {
@@ -23,12 +24,18 @@ export const tarefaRoutes: Routes = [
   {
     path: 'cadastrar',
     component: CadastrarTarefaComponent,
+    resolve: {
+      categorias: listagemCategoriasResolver
+
+    }
   },
   {
     path: 'editar/:id',
     component: EditarTarefaComponent,
     resolve: {
-      tarefa: visualizarTarefaResolver
+      tarefa: visualizarTarefaResolver,
+      categorias: listagemCategoriasResolver
+
     }
   },
   {

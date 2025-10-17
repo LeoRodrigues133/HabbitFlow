@@ -15,6 +15,15 @@
           </mat-error>
         </mat-form-field>
 
+        <mat-form-field class="w-100 mt-3" appearance="fill">
+          <mat-label>Categoria</mat-label>
+          <mat-select formControlName="categoriaId">
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+              {{ categoria.titulo }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <div class="row justify-content-end g-2 gap-2 mt-3">
           <button type="submit" mat-flat-button class="col-sm-4 app-custom-button-color">
             <mat-icon matIconPrefix>check</mat-icon>

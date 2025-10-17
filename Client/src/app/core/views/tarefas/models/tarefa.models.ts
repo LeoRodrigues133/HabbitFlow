@@ -5,11 +5,12 @@ export interface listarTarefaViewModel {
 }
 export interface CadastrarTarefaViewModel {
   titulo: string;
-
+  categoriaId?: string;
 }
 export interface EditarTarefaViewModel {
   id: string;
   titulo: string;
+  categoriaId?: string;
 
 }
 export interface ExcluirTarefaViewModel { }

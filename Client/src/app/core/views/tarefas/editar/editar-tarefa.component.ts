@@ -3,17 +3,20 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TarefaService } from '../services/tarefa.service';
 import { EditarTarefaViewModel } from '../models/tarefa.models';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ListarCategoriaViewModel } from '../../categorias/models/categoria.models';
 
 @Component({
   selector: 'app-editar-tarefa',
-  imports: [NgIf,
+  imports: [
+    NgIf,
+    NgForOf,
     RouterLink,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -28,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class EditarTarefaComponent {
   form: FormGroup;
+  categorias?: ListarCategoriaViewModel[] = [];
 
 
   constructor(private formBuilder: FormBuilder,
@@ -42,14 +46,20 @@ export class EditarTarefaComponent {
             [Validators.required,
             Validators.minLength(3),
             Validators.maxLength(40)]
-          ]
+          ],
+        categoriaId: [],
       });
   }
 
   ngOnInit(): void {
-    const categoria = this.route.snapshot.data['categoria'];
+    const tarefa = this.route.snapshot.data['tarefa'];
+    this.categorias = this.route.snapshot.data['categorias'];
 
-    this.form.patchValue(categoria);
+
+    this.form.patchValue({
+      ...tarefa,
+      categoriaId: tarefa.categoriaId
+    });
   }
 
   editar() {

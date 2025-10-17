@@ -41,6 +41,8 @@ export class ExclusaoTarefaComponent {
       next: () => this.processarSucesso(),
       error: (erro) => this.processarFalha(erro)
     });
+
+    this.router.navigate(['/dashboard']);
   }
 
   private processarSucesso(): void {
